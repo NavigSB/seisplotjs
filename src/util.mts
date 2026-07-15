@@ -899,7 +899,7 @@ export function doFetchWithTimeout(
               if (httpsResponse.ok || httpsResponse.status === 404) {
                 return httpsResponse;
               } else {
-                return response.text().then((text) => {
+                return httpsResponse.text().then((text) => {
                   throw new Error(
                     `fetch response was redirect for http and failed for https. ${response.ok} ${response.status}, ${httpsResponse.ok} ${httpsResponse.status} \n${text}`,
                   );

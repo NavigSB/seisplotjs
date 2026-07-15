@@ -123,7 +123,7 @@ test( "run dataselect test", () => {
     expect(sddList[0].channelCode).toBe(CHAN);
     expect(sddList[0].seismogram).toBeDefined();
   });
-});
+}, 10*1000);
 
 
 test("seismograms for CO.BIRD for timewindow", () => {
@@ -153,7 +153,7 @@ test("seismograms for CO.BIRD for timewindow", () => {
     expect(seismogram.isContiguous()).toBeTrue();
     expect(seismogram.y).toHaveLength(sed.toDuration().toMillis()/1000*100+1);
   });
-});
+}, 10*1000);
 
 test("sddlist seismograms for CO.BIRD for timewindow", () => {
   const fedCatQuery = new FedCatalogQuery();
@@ -192,4 +192,4 @@ test("sddlist seismograms for CO.BIRD for timewindow", () => {
     expect(seismogram.isContiguous()).toBeTrue();
     expect(seismogram.y).toHaveLength(sed.toDuration().toMillis()/1000*100+1);
   });
-});
+}, 10*1000);
