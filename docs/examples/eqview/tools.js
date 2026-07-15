@@ -1,4 +1,4 @@
-import * as sp from "../../seisplotjs_3.2.5_standalone.mjs";
+import * as sp from "../../seisplotjs_3.2.6-snapshot_standalone.mjs";
 
 
 export function createTools(viewObspy) {
