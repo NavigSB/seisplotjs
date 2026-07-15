@@ -5,7 +5,7 @@ import * as fdsndatacenters from "../src/fdsndatacenters.mjs";
 
 test( "form url test", () => {
   const query = new fdsndatacenters.DataCentersQuery();
-  const NAME = "IRISDMC";
+  const NAME = "EarthScope";
   const SERVICES = "fdsnws-dataselect-1";
   const INCLUDE_DATASETS = true;
   const FDNS_HOST = "www.fdsn.org";
