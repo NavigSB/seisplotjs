@@ -33,8 +33,8 @@ export function quakeFilter(sdd: SeismogramDisplayData, container?: Element|null
 
 export function inputIdFilter(inputId: string, container?: Element|null) {
     let out = true; // plot by default
-    const queryEl = (!!container) ? container : document;
-    let inputEl = queryEl.querySelector(`#${inputId}`) as HTMLInputElement;
+    const queryEl = (container!=null) ? container : document;
+    const inputEl = queryEl.querySelector(`#${inputId}`) as HTMLInputElement;
     if ( inputEl != null) {
       out = inputEl.checked;
     }

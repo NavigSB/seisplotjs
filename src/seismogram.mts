@@ -1441,9 +1441,9 @@ export function findStartEndOfSeismograms(
 ): Interval {
   let out: Interval;
 
-  if (!accumulator && !data) {
+  if (accumulator==null && data==null) {
     throw new Error("data and accumulator are not defined");
-  } else if (!accumulator) {
+  } else if (accumulator==null) {
     if (data.length !== 0) {
       out = data[0].timeRange;
     } else {
@@ -1456,7 +1456,7 @@ export function findStartEndOfSeismograms(
   if (Array.isArray(data)) {
     out = data.reduce(
       (acc, cur) => acc.union(cur.timeRange),
-      data[0].timeRange,
+      out,
     );
   } else {
     throw new Error(`Expected Array as first arg but was: ${typeof data}`);
@@ -1547,7 +1547,7 @@ export function uniqueSubsourceCodes(seisData: Array<SeismogramDisplayData>) {
 export function uniqueSourceIds(seisData: Array<SeismogramDisplayData>) {
   // use Map based on String as Set does object by reference equality,
   // not object equals() equality. Strings will eliminate duplicates.
-  const out = new Map<String, FDSNSourceId>();
+  const out = new Map<string, FDSNSourceId>();
   seisData.forEach((sdd) => {
       out.set(sdd.sourceId.toString(), sdd.sourceId);
   });

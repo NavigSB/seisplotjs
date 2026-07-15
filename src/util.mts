@@ -256,7 +256,7 @@ export class SeisPlotDebugElement extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    let shadow = this.shadowRoot;
+    const shadow = this.shadowRoot;
     if (shadow != null) {
       const pre = shadow.appendChild(document.createElement("pre"));
       pre.appendChild(document.createElement("code"));
@@ -264,20 +264,20 @@ export class SeisPlotDebugElement extends HTMLElement {
   }
   getCodeElement() {
     let code = null;
-    let shadow = this.shadowRoot;
+    const shadow = this.shadowRoot;
     if (shadow != null) {
       code = shadow.querySelector("code");
     }
     return code;
   }
   debug(msg: string) {
-    let code = this.getCodeElement();
+    const code = this.getCodeElement();
     if (code != null) {
       code.textContent = code.textContent  + msg.trim()+ "\n";
     }
   }
   clear() {
-    let code = this.getCodeElement();
+    const code = this.getCodeElement();
     if (code != null) {
       code.innerHTML = "";
     }

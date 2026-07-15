@@ -50,7 +50,7 @@ export interface HeliEventMap extends HTMLElementEventMap {
   "heliclick": CustomEvent<HeliMouseEventType>,
   "helimousemove": CustomEvent<HeliMouseEventType>,
 }
-export interface Helicorder extends SeisPlotElement {
+export interface IHelicorder extends SeisPlotElement {
   // overload for custom events
   addEventListener<E extends keyof HeliEventMap>(type: E, listener: (ev: HeliEventMap[E]) => any): void;
 }
@@ -61,7 +61,7 @@ export interface Helicorder extends SeisPlotElement {
  * @param heliConfig configuration object
  * @param seisData the data to display
  */
-export class Helicorder extends SeisPlotElement {
+export class Helicorder extends SeisPlotElement implements IHelicorder {
   constructor(
     seisData?: Array<SeismogramDisplayData>,
     seisConfig?: SeismographConfig,

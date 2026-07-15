@@ -426,7 +426,7 @@ export class DataLinkConnection {
     dataString?: string,
   ): Promise<DataLinkResponse | DataLinkPacket> {
     if (this.logCommandFn) {
-      this.logCommandFn(`${command} ${!!dataString?dataString:""}`);
+      this.logCommandFn(`${command} ${(dataString!=null)?dataString:""}`);
     }
     return this.awaitDLBinary(command, stringToUint8Array(dataString));
   }

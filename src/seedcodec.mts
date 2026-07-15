@@ -274,8 +274,8 @@ export function decodeSteim1(
   let tempSamples;
   const numFrames = dataView.byteLength / 64;
   let current = 0;
-  let start = 0;
-  let firstData = 0;
+  let start;
+  let firstData;
   let lastValue = 0;
   let i, j;
 
@@ -343,7 +343,7 @@ function extractSteim1Samples(
 ): Array<number> {
   /* get nibbles */
   const nibbles = dataView.getInt32(offset, littleEndian);
-  let currNibble = 0;
+  let currNibble;
   const temp = []; // 4 samples * 16 longwords, can't be more than 64
 
   let currNum = 0;
@@ -440,8 +440,8 @@ export function decodeSteim2(
   let tempSamples;
   const numFrames = dataView.byteLength / 64;
   let current = 0;
-  let start = 0;
-  let firstData = 0;
+  let start;
+  let firstData;
   let lastValue = 0;
 
   //System.err.println("DEBUG: number of samples: " + numSamples + ", number of frames: " + numFrames + ", byte array size: " + b.length);
@@ -514,17 +514,17 @@ function extractSteim2Samples(
 ): Int32Array {
   /* get nibbles */
   const nibbles = dataView.getUint32(offset, swapBytes);
-  let currNibble = 0;
-  let dnib = 0;
+  let currNibble;
+  let dnib;
   const temp = new Int32Array(106); //max 106 = 7 samples * 15 long words + 1 nibble int
 
   let tempInt;
   let currNum = 0;
-  let diffCount = 0; // number of differences
+  let diffCount; // number of differences
 
-  let bitSize = 0; // bit size
+  let bitSize; // bit size
 
-  let headerSize = 0; // number of header/unused bits at top
+  let headerSize; // number of header/unused bits at top
 
   for (let i = 0; i < 16; i++) {
     currNibble = (nibbles >> (30 - i * 2)) & 0x03;
@@ -588,11 +588,11 @@ function extractSteim2Samples(
         dnib = (tempInt >> 30) & 0x03;
         // for case 3, we are going to use a for-loop formulation that
         // accomplishes the same thing as case 2, just less verbose.
-        diffCount = 0; // number of differences
+        // diffCount=0; // number of differences
 
-        bitSize = 0; // bit size
+        //bitSize=0; // bit size
 
-        headerSize = 0; // number of header/unused bits at top
+        //headerSize=0; // number of header/unused bits at top
 
         switch (dnib) {
           case 0:

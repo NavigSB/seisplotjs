@@ -240,12 +240,12 @@ export class QuakeStationTable extends SeisPlotElement {
 
 customElements.define(INFO_ELEMENT, QuakeStationTable);
 
-export interface QuakeTable extends HTMLElement {
+export interface IQuakeTable extends HTMLElement {
   // overload for custom events
   addEventListener<E extends keyof QuakeClickEventMap>(type: E, listener: (ev: QuakeClickEventMap[E]) => any): void;
 }
 
-export class QuakeTable extends HTMLElement {
+export class QuakeTable extends HTMLElement implements IQuakeTable {
   _columnLabels: Map<string, string>;
   _quakeList: Array<Quake>;
   _rowToQuake: Map<HTMLTableRowElement, Quake>;
@@ -573,11 +573,11 @@ export class QuakeTable extends HTMLElement {
 
 customElements.define(QUAKE_INFO_ELEMENT, QuakeTable);
 
-export interface ChannelTable extends HTMLElement {
+export interface IChannelTable extends HTMLElement {
   // overload for custom events
   addEventListener<E extends keyof ChannelClickEventMap>(type: E, listener: (ev: ChannelClickEventMap[E]) => any): void;
 }
-export class ChannelTable extends HTMLElement {
+export class ChannelTable extends HTMLElement implements IChannelTable {
   _columnLabels: Map<string, string>;
   _columnValues: Map<string, (c: Channel) => string|HTMLElement>;
   _channelList: Array<Channel>;
@@ -899,11 +899,11 @@ export class ChannelTable extends HTMLElement {
 export const CHANNEL_INFO_ELEMENT = "sp-channel-table";
 customElements.define(CHANNEL_INFO_ELEMENT, ChannelTable);
 
-export interface StationTable extends HTMLElement {
+export interface IStationTable extends HTMLElement {
   // overload for custom events
   addEventListener<E extends keyof StationClickEventMap>(type: E, listener: (ev: StationClickEventMap[E]) => any): void;
 }
-export class StationTable extends HTMLElement {
+export class StationTable extends HTMLElement implements IStationTable {
   _columnLabels: Map<string, string> = new Map();
   _stationList: Array<Station>;
   _rowToStation: Map<HTMLTableRowElement, Station>;

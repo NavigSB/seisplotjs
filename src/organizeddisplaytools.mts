@@ -250,7 +250,7 @@ export class OrganizedDisplayTools extends SeisPlotElement {
       return;
     }
 
-    let orientations = uniqueSubsourceCodes(orgdisp.sortedSeisData()).sort();
+    const orientations = uniqueSubsourceCodes(orgdisp.sortedSeisData()).sort();
     orientations.forEach(orient => {
       const key = `orient_${orient}`;
       const name = "orientation";

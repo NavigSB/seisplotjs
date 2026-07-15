@@ -264,16 +264,16 @@ export const MAP_CSS_ID = "stationquakemapcss";
 export const MARKER_CSS_ID = "defaultmarkercss";
 
 
-export interface QuakeStationMapEventMap extends StationClickEventMap, QuakeClickEventMap {
+export interface IQuakeStationMapEventMap extends StationClickEventMap, QuakeClickEventMap {
 
 }
-export interface QuakeStationMap extends SeisPlotElement {
+export interface IQuakeStationMap extends SeisPlotElement  {
   // overload for custom events
-  addEventListener<E extends keyof QuakeStationMapEventMap>(type: E, listener: (ev: QuakeStationMapEventMap[E]) => any): void;
+  addEventListener<E extends keyof IQuakeStationMapEventMap>(type: E, listener: (ev: IQuakeStationMapEventMap[E]) => any): void;
 }
 
 
-export class QuakeStationMap extends SeisPlotElement {
+export class QuakeStationMap extends SeisPlotElement implements IQuakeStationMap {
   quakeList: Array<Quake> = [];
   stationList: Array<Station> = [];
   geoRegionList: Array<LatLonBox | LatLonRadius> = [];
