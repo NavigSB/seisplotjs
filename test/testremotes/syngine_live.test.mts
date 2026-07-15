@@ -1,6 +1,6 @@
 import {describe, expect, test} from 'vitest';
 
-import {IRIS_HOST} from "../../src/fdsncommon.mjs";
+import {EARTHSCOPE_HOST} from "../../src/fdsncommon.mjs";
 import {setDefaultFetch} from "../../src/util.mjs";
 import fetch from "cross-fetch";
 setDefaultFetch(fetch);
@@ -20,7 +20,7 @@ test("version", () => {
 
 test("formURL", () => {
   const query = new syngine.SyngineQuery();
-  expect(query.host(IRIS_HOST)).toBe(query);
+  expect(query.host(EARTHSCOPE_HOST)).toBe(query);
   expect(query.originTime('2010-02-27T06:30:00.000')).toBe(query);
   expect(query.sourceLatitude(-35.98)).toBe(query);
   expect(query.sourceLongitude(-73)).toBe(query);

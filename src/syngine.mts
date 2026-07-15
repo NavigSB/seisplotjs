@@ -3,7 +3,7 @@
  * University of South Carolina, 2025
  * https://www.seis.sc.edu
  */
-import { FDSNCommon, IRIS_HOST, IRISWS_PATH_BASE, appendToPath } from "./fdsncommon.mjs";
+import { FDSNCommon, EARTHSCOPE_HOST, IRISWS_PATH_BASE, appendToPath } from "./fdsncommon.mjs";
 import { FORMAT_MINISEED } from "./fdsndataselect.mjs";
 import { TESTING_NETWORK } from "./fdsnsourceid.mjs";
 import { Quake } from "./quakeml.mjs";
@@ -154,7 +154,7 @@ export class SyngineQuery extends FDSNCommon {
 
   constructor(host?: string) {
     if (!isNonEmptyStringArg(host)) {
-      host = IRIS_HOST;
+      host = EARTHSCOPE_HOST;
     }
     super(SYNGINE_SERVICE, host);
     this._path_base = IRISWS_PATH_BASE;

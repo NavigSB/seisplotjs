@@ -3,7 +3,7 @@
  * University of South Carolina, 2020
  * https://www.seis.sc.edu
  */
-import { FDSNCommon, IRIS_HOST, IRISWS_PATH_BASE, appendToPath } from "./fdsncommon.mjs";
+import { FDSNCommon, EARTHSCOPE_HOST, IRISWS_PATH_BASE, appendToPath } from "./fdsncommon.mjs";
 import { DateTime, Interval } from "luxon";
 import { Network } from "./stationxml.mjs";
 import {
@@ -234,7 +234,7 @@ export class FedCatalogQuery extends FDSNCommon {
    */
   constructor(host?: string) {
     if (!isNonEmptyStringArg(host)) {
-      host = IRIS_HOST;
+      host = EARTHSCOPE_HOST;
     }
     super(IRISFEDCAT_SERVICE, host);
     this._path_base = IRISWS_PATH_BASE;

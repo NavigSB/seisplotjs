@@ -64,7 +64,7 @@ export const EARTHSCOPE_HOST = "rtserve.earthscope.org";
  * Web connection to a Ringserver.
  *
  *
- * @param host optional host to connect to, defaults to IRIS. This maybe a full URL.
+ * @param host optional host to connect to, defaults to Earthscope. This maybe a full URL.
  * @param port optional host to connect to, defaults to 80
  */
 export class RingserverConnection {

@@ -3,7 +3,7 @@
  * University of South Carolina, 2019
  * https://www.seis.sc.edu
  */
-import { FDSNCommon, IRIS_HOST, IRISWS_PATH_BASE, appendToPath } from "./fdsncommon.mjs";
+import { FDSNCommon, EARTHSCOPE_HOST, IRISWS_PATH_BASE, appendToPath } from "./fdsncommon.mjs";
 import {
   doStringGetterSetter,
   doBoolGetterSetter,
@@ -199,7 +199,7 @@ export class TraveltimeQuery extends FDSNCommon {
 
   constructor(host?: string | null) {
     if (!isNonEmptyStringArg(host)) {
-      host = IRIS_HOST;
+      host = EARTHSCOPE_HOST;
     }
     super(TRAVELTIME_SERVICE, host);
     this._path_base = IRISWS_PATH_BASE;
