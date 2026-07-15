@@ -13,10 +13,6 @@ Import like:
 ```
 import * as sp from 'seisplotjs';
 ```
-or to avoid browser specific (like HTMLElement) items:
-```
-import * as sp from 'seisplotjs/nodeonly';
-```
 
 Seisplotjs is divided into submodules:
 
