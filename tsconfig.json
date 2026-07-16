@@ -9,11 +9,11 @@
     "declaration": true,
     "sourceMap": true,
     "declarationMap": true,
-    "rootDir": "src",
+    "rootDir": "./src",
     "outDir": "dist",
     "esModuleInterop": true,
 
     "types": ["jest", "jest-extended"]
   },
-  "include": ["src"]
+  "include": ["./src"]
 }
