@@ -43831,19 +43831,15 @@ function doFetchWithTimeout(url2, fetchInit, timeoutSec2, fetcher) {
     } else if (response.status >= 300 && response.status <= 399) {
       if (checkProtocol() === "http:" && absoluteUrl.href.startsWith("http://")) {
         const httpsUrl = new URL(`https://${absoluteUrl.href.slice(7)}`);
-        console.log(`retry https: with ${httpsUrl}`);
         const method = internalFetchInit.method ? internalFetchInit.method : "";
         log(
           `attempt fetch redirect ${response.status} ${method} to ${stringify(httpsUrl)}`
         );
-        console.log(`href = ${httpsUrl.href}`);
-        console.log(`method: ${internalFetchInit.method}`);
         return fetchForRedirect(httpsUrl.href, internalFetchInit).then(
           (httpsResponse) => {
             if (httpsResponse.ok || httpsResponse.status === 404) {
               return httpsResponse;
             } else {
-              console.log(`response: ${httpsResponse}  `);
               return httpsResponse.text().then((text) => {
                 throw new Error(
                   `fetch response was redirect for http and failed for https. ${response.ok} ${response.status}, ${httpsResponse.ok} ${httpsResponse.status} 
@@ -67220,7 +67216,7 @@ function createOriginArrival(distdeg) {
 var TraveltimeQuery = class extends FDSNCommon {
   constructor(host) {
     if (!isNonEmptyStringArg(host)) {
-      host = IRIS_HOST;
+      host = EARTHSCOPE_HOST;
     }
     super(TRAVELTIME_SERVICE, host);
     this._path_base = IRISWS_PATH_BASE;
@@ -89165,7 +89161,7 @@ var FedCatalogQuery = class _FedCatalogQuery extends FDSNCommon {
    */
   constructor(host) {
     if (!isNonEmptyStringArg(host)) {
-      host = IRIS_HOST;
+      host = EARTHSCOPE_HOST;
     }
     super(IRISFEDCAT_SERVICE, host);
     this._path_base = IRISWS_PATH_BASE;
@@ -90705,7 +90701,7 @@ function calcMoment(Mw) {
 var SyngineQuery = class extends FDSNCommon {
   constructor(host) {
     if (!isNonEmptyStringArg(host)) {
-      host = IRIS_HOST;
+      host = EARTHSCOPE_HOST;
     }
     super(SYNGINE_SERVICE, host);
     this._path_base = IRISWS_PATH_BASE;
