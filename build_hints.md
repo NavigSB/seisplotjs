@@ -16,3 +16,13 @@ npm run prepublishOnly
 
 npm login
 npm publish
+
+# tag, and github
+git tag -a -m 'v3.2.6' v3.2.6
+git push
+# create release on github for tag and add standalone as binary
+
+git switch main
+git merge dev
+
+# zenodo, draft new release
