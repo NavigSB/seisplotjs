@@ -8,6 +8,9 @@ import {USGS_HOST} from './quakeml.mjs';
 export const EARTHSCOPE_HOST = "service.earthscope.org";
 export const IRIS_HOST = EARTHSCOPE_HOST;
 
+/** const for fdsn web service host, www.fdsn.org */
+export const FDSN_HOST = "www.fdsn.org";
+
 export const FDSNWS_PATH_BASE = "fdsnws";
 export const IRISWS_PATH_BASE = "irisws";
 export const LOCALWS_PATH_BASE = "localws";
@@ -68,6 +71,7 @@ export function protocolForKnownHost(host: string, defaultProtocol: string) {
   switch(host.toLowerCase()) {
     case EARTHSCOPE_HOST:
     case USGS_HOST:
+    case FDSN_HOST:
       return "https";
     default:
       return defaultProtocol;

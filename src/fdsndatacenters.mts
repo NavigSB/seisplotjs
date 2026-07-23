@@ -4,7 +4,9 @@
  * https://www.seis.sc.edu
  */
 
-import { FDSNCommon, appendToPath, protocolForKnownHost } from "./fdsncommon.mjs";
+import {
+  FDSNCommon, appendToPath, protocolForKnownHost, FDSN_HOST
+} from "./fdsncommon.mjs";
 import {
   doStringGetterSetter,
   doBoolGetterSetter,
@@ -24,9 +26,6 @@ import * as fdsnavailability from "./fdsnavailability.mjs";
 import * as fdsndataselect from "./fdsndataselect.mjs";
 import * as fdsnevent from "./fdsnevent.mjs";
 import * as fdsnstation from "./fdsnstation.mjs";
-
-/** const for fdsn web service host, www.fdsn.org */
-export const FDSN_HOST = "www.fdsn.org";
 
 /** const for service name */
 export const DATACENTERS_SERVICE = "datacenters";
