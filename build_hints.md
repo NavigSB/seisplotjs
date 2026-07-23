@@ -6,6 +6,7 @@ npm run compile
 
 # Test
 npm test
+npm run testremotes
 
 #before publish:
 update version in package.json
