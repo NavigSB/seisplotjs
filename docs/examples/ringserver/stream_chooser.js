@@ -1,3 +1,6 @@
+
+import * as sp from "../../seisplotjs_3.2.6_standalone.mjs";
+
 class StreamListChooser extends HTMLElement {
   constructor() {
     super();
@@ -53,7 +56,7 @@ class StreamListChooser extends HTMLElement {
       });
       const nlabel = div.appendChild(document.createElement("label"));
       nlabel.setAttribute("for", c.key);
-      nlabel.textContent = `${c.key} ${c.calcLatency().toHuman()}`;
+      nlabel.textContent = `${c.id} ${sp.ringserverweb4.calcLatency(c).toHuman()}`;
     });
     shadowDiv.appendChild(details);
   }

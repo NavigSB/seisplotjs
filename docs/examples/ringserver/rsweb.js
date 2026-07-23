@@ -1,7 +1,7 @@
 import * as sp from "../../seisplotjs_3.2.6_standalone.mjs";
 
-const hostUrl = "https://rtserve.iris.washington.edu";
-const rs = new sp.ringserverweb.RingserverConnection(hostUrl);
+const hostUrl = "https://rtserve.earthscope.org";
+const rs = new sp.ringserverweb4.RingserverConnection(hostUrl);
 let numPackets = 0;
 
 document.querySelector("#hostid").textContent = hostUrl;
@@ -13,7 +13,8 @@ document.querySelector("button#id").addEventListener("click", function (evt) {
   document.querySelector("div.results pre").textContent = "...loading";
   rs.pullId().then((o) => {
     document.querySelector("div.results pre").textContent =
-      o.ringserverVersion + "\n" + o.serverId + "\n" + o.datalink +"\n" + o.seedlink;
+      o.software + "\n" + o.organization + "\n" + o.server_start+ "\n"
+      + o.datalink_protocol.join(", ") +"\n" + o.seedlink_protocol.join(", ");
   });
 });
 document
@@ -21,9 +22,8 @@ document
   .addEventListener("click", function (evt) {
     clear_plots();
     document.querySelector("div.results pre").textContent = "...loading";
-    let level = Number(document.querySelector("input#level").value);
     let match = document.querySelector("input#match").value.trim();
-    rs.pullStreamIds(level, match).then((o) => {
+    rs.pullStreamIds(match).then((o) => {
       document.querySelector("div.results pre").textContent = o.join("\n");
     });
   });
@@ -37,11 +37,11 @@ document
     rs.pullStreams(match).then((o) => {
       const streamChooser = document.querySelector("stream-list-chooser");
       streamChooser.setCallback((c) => display_realtime(c));
-      streamChooser.setStreamStats(o.streams);
+      streamChooser.setStreamStats(o.stream);
       let text = "";
-      o.streams.forEach(
+      o.stream.forEach(
         (sstat) =>
-          (text += `${sstat.key} ${sstat.start.toISO()} ${sstat.end.toISO()} (${sstat.calcLatency(o.accessTime).toHuman()})\n`),
+          (text += `${sstat.id} ${sstat.start_time.toISO()} ${sstat.end_time.toISO()} (${sp.ringserverweb4.calcLatency(sstat).toHuman()})\n`),
       );
       document.querySelector("div.results pre").textContent = text;
     });
@@ -81,12 +81,12 @@ function display_realtime(streamstat) {
   datalink.endStream();
   lastPackets = [];
   document.querySelector("div.results pre").textContent =
-    `realtime: ${streamstat.key}\n`;
+    `realtime: ${streamstat.id}\n`;
   datalink
     .connect()
     .then((serverId) => {
       document.querySelector("button#disconnect").textContent = "Disconnect";
-      return datalink.match(streamstat.key);
+      return datalink.match(streamstat.id);
     })
     .then((response) => {
       stopped = false;
@@ -130,7 +130,7 @@ let toggleConnect = function (streamstat) {
     }
     document.querySelector("button#disconnect").textContent = "Reconnect";
   } else {
-    let matchPattern = streamstat.key;
+    let matchPattern = streamstat.id;
     if (datalink) {
       datalink
         .connect()

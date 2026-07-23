@@ -61508,6 +61508,7 @@ __export(fdsncommon_exports, {
   EARTHSCOPE_HOST: () => EARTHSCOPE_HOST,
   FDSNCommon: () => FDSNCommon,
   FDSNWS_PATH_BASE: () => FDSNWS_PATH_BASE,
+  FDSN_HOST: () => FDSN_HOST,
   IRISWS_PATH_BASE: () => IRISWS_PATH_BASE,
   IRIS_HOST: () => IRIS_HOST,
   LOCALWS_PATH_BASE: () => LOCALWS_PATH_BASE,
@@ -61515,10 +61516,12 @@ __export(fdsncommon_exports, {
   LatLonRadius: () => LatLonRadius,
   LatLonRegion: () => LatLonRegion,
   appendToPath: () => appendToPath,
-  defaultPortStringForProtocol: () => defaultPortStringForProtocol
+  defaultPortStringForProtocol: () => defaultPortStringForProtocol,
+  protocolForKnownHost: () => protocolForKnownHost
 });
 var EARTHSCOPE_HOST = "service.earthscope.org";
 var IRIS_HOST = EARTHSCOPE_HOST;
+var FDSN_HOST = "www.fdsn.org";
 var FDSNWS_PATH_BASE = "fdsnws";
 var IRISWS_PATH_BASE = "irisws";
 var LOCALWS_PATH_BASE = "localws";
@@ -61539,6 +61542,16 @@ var FDSNCommon = class {
     return defaultPortStringForProtocol(protocol, this._port);
   }
 };
+function protocolForKnownHost(host, defaultProtocol) {
+  switch (host.toLowerCase()) {
+    case EARTHSCOPE_HOST:
+    case USGS_HOST:
+    case FDSN_HOST:
+      return "https";
+    default:
+      return defaultProtocol;
+  }
+}
 function defaultPortStringForProtocol(protocol, port) {
   return (protocol === "http" || protocol === "http:" || protocol === "https" || protocol === "https:") && (port === 80 || port === 443) ? "" : ":" + String(port);
 }
@@ -67501,12 +67514,13 @@ var TraveltimeQuery = class extends FDSNCommon {
    */
   formBaseURL() {
     let colon = ":";
-    if (this._protocol.endsWith(colon)) {
+    const protocol = protocolForKnownHost(this._host, this._protocol);
+    if (protocol.endsWith(colon)) {
       colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path2 = `${this._path_base}/${this._service}/${this._specVersion}`;
-    return `${this._protocol}${colon}//${this._host}${port}/${path2}`;
+    return `${protocol}${colon}//${this._host}${port}/${path2}`;
   }
   formURL() {
     let url2 = appendToPath(this.formBaseURL(), "query?");
@@ -69158,12 +69172,13 @@ var AvailabilityQuery = class extends FDSNCommon {
    */
   formBaseURL() {
     let colon = ":";
-    if (this._protocol.endsWith(colon)) {
+    const protocol = protocolForKnownHost(this._host, this._protocol);
+    if (protocol.endsWith(colon)) {
       colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path2 = `${this._path_base}/${this._service}/${this._specVersion}`;
-    return `${this._protocol}${colon}//${this._host}${port}/${path2}`;
+    return `${protocol}${colon}//${this._host}${port}/${path2}`;
   }
   formVersionURL() {
     return appendToPath(this.formBaseURL(), "version");
@@ -69274,7 +69289,6 @@ __export(fdsndatacenters_exports, {
   DATACENTERS_PATH_BASE: () => DATACENTERS_PATH_BASE,
   DATACENTERS_SERVICE: () => DATACENTERS_SERVICE,
   DataCentersQuery: () => DataCentersQuery,
-  FDSN_HOST: () => FDSN_HOST,
   isValidRootType: () => isValidRootType2
 });
 
@@ -69721,7 +69735,7 @@ var DataSelectQuery = class _DataSelectQuery extends FDSNCommon {
    */
   formBaseURL() {
     let colon = ":";
-    const protocol = this._host === EARTHSCOPE_HOST ? "https:" : this._protocol;
+    const protocol = protocolForKnownHost(this._host, this._protocol);
     if (protocol.endsWith(colon)) {
       colon = "";
     }
@@ -70429,12 +70443,13 @@ var EventQuery = class extends FDSNCommon {
       this._host = USGS_HOST;
       this._protocol = "https:";
     }
-    if (this._protocol.endsWith(colon)) {
+    const protocol = protocolForKnownHost(this._host, this._protocol);
+    if (protocol.endsWith(colon)) {
       colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path2 = `${this._path_base}/${this._service}/${this._specVersion}`;
-    return `${this._protocol}${colon}//${this._host}${port}/${path2}`;
+    return `${protocol}${colon}//${this._host}${port}/${path2}`;
   }
   /**
    * Forms the URL to get catalogs from the web service, without any query paramters
@@ -71477,12 +71492,13 @@ var StationQuery = class extends FDSNCommon {
    */
   formBaseURL() {
     let colon = ":";
-    if (this._protocol.endsWith(colon)) {
+    const protocol = protocolForKnownHost(this._host, this._protocol);
+    if (protocol.endsWith(colon)) {
       colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path2 = `${this._path_base}/${this._service}/${this._specVersion}`;
-    return `${this._protocol}${colon}//${this._host}${port}/${path2}`;
+    return `${protocol}${colon}//${this._host}${port}/${path2}`;
   }
   formPostURL() {
     return appendToPath(this.formBaseURL(), "query");
@@ -71581,7 +71597,6 @@ var StationQuery = class extends FDSNCommon {
 };
 
 // src/fdsndatacenters.mts
-var FDSN_HOST = "www.fdsn.org";
 var DATACENTERS_SERVICE = "datacenters";
 var DATACENTERS_PATH_BASE = "ws";
 var DataCentersQuery = class extends FDSNCommon {
@@ -71902,12 +71917,13 @@ var DataCentersQuery = class extends FDSNCommon {
    */
   formBaseURL() {
     let colon = ":";
-    if (this._protocol.endsWith(colon)) {
+    const protocol = protocolForKnownHost(this._host, this._protocol);
+    if (protocol.endsWith(colon)) {
       colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path2 = `${this._path_base}/${this._service}/${this._specVersion}`;
-    return `${this._protocol}${colon}//${this._host}${port}/${path2}`;
+    return `${protocol}${colon}//${this._host}${port}/${path2}`;
   }
   /**
    * Forms version url, not part of spec and so may not be supported.
@@ -87951,6 +87967,7 @@ __export(ringserverweb4_exports, {
   IRIS_HOST: () => IRIS_HOST2,
   RingserverConnection: () => RingserverConnection,
   SEEDLINK_PATH: () => SEEDLINK_PATH,
+  calcLatency: () => calcLatency,
   sidForId: () => sidForId,
   stationsFromStreams: () => stationsFromStreams,
   typeForId: () => typeForId
@@ -88132,13 +88149,12 @@ var RingserverConnection = class {
    *  The optional matchPattern is a regular expression, so for example
    *  '.+_JSC_00_HH.' would get all HH? channels from any station name JSC.
    *
-   * @param level 1-6
    * @param matchPattern regular expression to match
    * @returns Result as a Promise.
    */
   pullStreamIds(matchPattern) {
     let queryParams = "";
-    if (matchPattern && matchPattern.length > 0) {
+    if (matchPattern != null && matchPattern.length > 0) {
       queryParams = queryParams + "&match=" + matchPattern;
     }
     const url2 = this.formStreamIdsURL(queryParams);
@@ -88205,11 +88221,18 @@ var RingserverConnection = class {
    * @returns the string url
    */
   formBaseURL() {
-    if (this._port === 0) {
-      this._port = 80;
+    const protocol = protocolForKnownHost(this._host, this._protocol);
+    let colon = ":";
+    if (protocol.endsWith(colon)) {
+      colon = "";
     }
-    const port = defaultPortStringForProtocol(this._protocol, this._port);
-    return `${checkProtocol(this._protocol)}//${this._host}${port}${this._prefix}`;
+    let port;
+    if (this._port === 0) {
+      port = defaultPortStringForProtocol(protocol, 80);
+    } else {
+      port = defaultPortStringForProtocol(protocol, this._port);
+    }
+    return `${checkProtocol(protocol)}${colon}//${this._host}${port}${this._prefix}`;
   }
   /**
    * Forms the ringserver id/json url.
@@ -88235,7 +88258,16 @@ var RingserverConnection = class {
    * @returns the stream ids url
    */
   formStreamIdsURL(queryParams) {
-    return appendToPath(this.formBaseURL(), "streamids") + (queryParams && queryParams.length > 0 ? "?" + queryParams : "");
+    let qpStr = "";
+    if (queryParams != null && queryParams.length > 0) {
+      if (queryParams.startsWith("&")) {
+        queryParams = queryParams.substring(1);
+      }
+      qpStr = `?${queryParams}`;
+    }
+    const path2 = appendToPath(this.formBaseURL(), "streamids");
+    const out = `${path2}${qpStr}`;
+    return out;
   }
 };
 function stationsFromStreams(streams) {
@@ -88270,6 +88302,9 @@ function stationsFromStreams(streams) {
     }
   }
   return Array.from(out.values());
+}
+function calcLatency(stat) {
+  return Interval.fromDateTimes(stat.end_time, DateTime.utc()).toDuration();
 }
 function typeForId(id2) {
   const split = id2.split("/");
@@ -90005,12 +90040,13 @@ var FedCatalogQuery = class _FedCatalogQuery extends FDSNCommon {
    */
   formBaseURL() {
     let colon = ":";
-    if (this._protocol.endsWith(colon)) {
+    const protocol = protocolForKnownHost(this._host, this._protocol);
+    if (protocol.endsWith(colon)) {
       colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path2 = appendToPath(appendToPath(this._path_base, this._service), this._specVersion);
-    return appendToPath(`${this._protocol}${colon}//${this._host}${port}`, path2);
+    return appendToPath(`${protocol}${colon}//${this._host}${port}`, path2);
   }
   /**
    * Form URL to post the remote web service. No parameters are added
@@ -91236,12 +91272,13 @@ var SyngineQuery = class extends FDSNCommon {
    */
   formBaseURL() {
     let colon = ":";
-    if (this._protocol.endsWith(colon)) {
+    const protocol = protocolForKnownHost(this._host, this._protocol);
+    if (protocol.endsWith(colon)) {
       colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path2 = `${this._path_base}/${this._service}/${this._specVersion}`;
-    return appendToPath(`${this._protocol}${colon}//${this._host}${port}`, path2);
+    return appendToPath(`${protocol}${colon}//${this._host}${port}`, path2);
   }
   formVersionURL() {
     return appendToPath(this.formBaseURL(), "version");

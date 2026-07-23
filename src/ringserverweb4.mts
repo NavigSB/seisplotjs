@@ -3,7 +3,7 @@
  * University of South Carolina, 2019
  * https://www.seis.sc.edu
  */
-import { DateTime } from "luxon";
+import { DateTime, Duration, Interval } from "luxon";
 import { z } from "zod/v4";
 import {
   defaultPortStringForProtocol, appendToPath, protocolForKnownHost
@@ -259,16 +259,14 @@ export class RingserverConnection {
    *  The optional matchPattern is a regular expression, so for example
    *  '.+_JSC_00_HH.' would get all HH? channels from any station name JSC.
    *
-   * @param level 1-6
    * @param matchPattern regular expression to match
    * @returns Result as a Promise.
    */
   pullStreamIds(matchPattern?: string): Promise<Array<string>> {
     let queryParams = "";
-    if (matchPattern && matchPattern.length > 0) {
+    if (matchPattern!=null && matchPattern.length > 0) {
       queryParams = queryParams + "&match=" + matchPattern;
     }
-
     const url = this.formStreamIdsURL(queryParams);
     return pullText(url, this._timeoutSec).then((raw) => {
       return raw.split("\n").filter((line) => line.length > 0);
@@ -403,8 +401,17 @@ export class RingserverConnection {
    * @returns the stream ids url
    */
   formStreamIdsURL(queryParams: string): string {
-    return appendToPath(this.formBaseURL(), "streamids") +
-      (queryParams && queryParams.length > 0 ? "?" + queryParams : "");
+
+    let qpStr = "";
+    if (queryParams!=null && queryParams.length > 0 ) {
+      if (queryParams.startsWith("&")) {
+        queryParams = queryParams.substring(1);
+      }
+      qpStr = `?${queryParams}`;
+    }
+    const path = appendToPath(this.formBaseURL(), "streamids");
+    const out = `${path}${qpStr}`;
+    return out;
   }
 }
 
@@ -456,6 +463,10 @@ export function stationsFromStreams(
   }
 
   return Array.from(out.values());
+}
+
+export function calcLatency(stat: StreamStatType): Duration {
+  return Interval.fromDateTimes(stat.end_time, DateTime.utc()).toDuration();
 }
 
 /**
