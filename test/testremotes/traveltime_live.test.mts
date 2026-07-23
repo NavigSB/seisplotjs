@@ -42,7 +42,7 @@ test("formURL", () => {
    'phases', 'format']) {
      expect(url).toContain('&'+k+'=');
    }
-   expect(url).toContain("http://"+EARTHSCOPE_HOST+"/irisws/traveltime/1/query?");
+   expect(url).toContain("https://"+EARTHSCOPE_HOST+"/irisws/traveltime/1/query?");
    return query.queryJson().then( tt => {
      expect(tt.arrivals.length).toEqual(11);
      expect(tt.sourcedepth).toEqual(query.getEvdepth());

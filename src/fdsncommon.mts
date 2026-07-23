@@ -3,6 +3,7 @@
  */
 
 import { isNonEmptyStringArg, checkProtocol } from "./util.mjs";
+import {USGS_HOST} from './quakeml.mjs';
 
 export const EARTHSCOPE_HOST = "service.earthscope.org";
 export const IRIS_HOST = EARTHSCOPE_HOST;
@@ -54,6 +55,22 @@ export class FDSNCommon {
   defaultPortStringForProtocol(protocol: string) {
     return defaultPortStringForProtocol(protocol, this._port);
 
+  }
+}
+
+/**
+ * Gets https or http for known FDSN WS hosts. Some, like Earthscope
+ * only use https, so using this avoids the redirect.
+ * @param  host  hostname, like service.earthscope.org
+ * @return     either https for know or default for others
+ */
+export function protocolForKnownHost(host: string, defaultProtocol: string) {
+  switch(host.toLowerCase()) {
+    case EARTHSCOPE_HOST:
+    case USGS_HOST:
+      return "https";
+    default:
+      return defaultProtocol;
   }
 }
 

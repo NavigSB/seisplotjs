@@ -3,7 +3,9 @@
  * University of South Carolina, 2019
  * https://www.seis.sc.edu
  */
-import { FDSNCommon, IRIS_HOST, EARTHSCOPE_HOST, appendToPath } from "./fdsncommon.mjs";
+import {
+  FDSNCommon, IRIS_HOST, EARTHSCOPE_HOST, appendToPath, protocolForKnownHost
+} from "./fdsncommon.mjs";
 import { NslcId } from "./fdsnsourceid.mjs";
 import * as util from "./util.mjs"; // for util.log
 import { DateTime, Interval } from "luxon";
@@ -593,7 +595,7 @@ export class DataSelectQuery extends FDSNCommon {
    */
   formBaseURL(): string {
     let colon = ":";
-    const protocol = this._host === EARTHSCOPE_HOST ? "https:" : this._protocol;
+    const protocol = protocolForKnownHost(this._host, this._protocol);
     if (protocol.endsWith(colon)) {
       colon = "";
     }

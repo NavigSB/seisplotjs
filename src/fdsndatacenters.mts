@@ -4,7 +4,7 @@
  * https://www.seis.sc.edu
  */
 
-import { FDSNCommon, appendToPath } from "./fdsncommon.mjs";
+import { FDSNCommon, appendToPath, protocolForKnownHost } from "./fdsncommon.mjs";
 import {
   doStringGetterSetter,
   doBoolGetterSetter,
@@ -433,13 +433,14 @@ export class DataCentersQuery extends FDSNCommon {
    */
   formBaseURL(): string {
     let colon = ":";
+    const protocol = protocolForKnownHost(this._host, this._protocol);
 
-    if (this._protocol.endsWith(colon)) {
+    if (protocol.endsWith(colon)) {
      colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path = `${this._path_base}/${this._service}/${this._specVersion}`;
-    return `${this._protocol}${colon}//${this._host}${port}/${path}`;
+    return `${protocol}${colon}//${this._host}${port}/${path}`;
   }
 
   /**

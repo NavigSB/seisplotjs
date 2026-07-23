@@ -3,7 +3,9 @@
  * University of South Carolina, 2025
  * https://www.seis.sc.edu
  */
-import { FDSNCommon, EARTHSCOPE_HOST, IRISWS_PATH_BASE, appendToPath } from "./fdsncommon.mjs";
+import {
+  FDSNCommon, EARTHSCOPE_HOST, IRISWS_PATH_BASE, appendToPath, protocolForKnownHost
+} from "./fdsncommon.mjs";
 import { FORMAT_MINISEED } from "./fdsndataselect.mjs";
 import { TESTING_NETWORK } from "./fdsnsourceid.mjs";
 import { Quake } from "./quakeml.mjs";
@@ -778,13 +780,14 @@ export class SyngineQuery extends FDSNCommon {
    */
   formBaseURL(): string {
     let colon = ":";
+    const protocol = protocolForKnownHost(this._host, this._protocol);
 
-    if (this._protocol.endsWith(colon)) {
-    colon = "";
+    if (protocol.endsWith(colon)) {
+      colon = "";
     }
-    const port = this.defaultPortStringForProtocol(this._protocol);
+    const port = this.defaultPortStringForProtocol(protocol);
     const path = `${this._path_base}/${this._service}/${this._specVersion}`;
-    return appendToPath(`${this._protocol}${colon}//${this._host}${port}`, path);
+    return appendToPath(`${protocol}${colon}//${this._host}${port}`, path);
   }
 
   formVersionURL(): string {
