@@ -62,7 +62,7 @@ export const SERVICE_VERSION = 1;
  */
 export const SERVICE_NAME = `fdsnws-${AVAILABILITY_SERVICE}-${SERVICE_VERSION}`;
 
-/** const for the default IRIS web service host, service.iris.edu */
+/** const for the default IRIS web service host, service.earthscope.org */
 export { IRIS_HOST, EARTHSCOPE_HOST };
 
 /**

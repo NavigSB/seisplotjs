@@ -4,8 +4,8 @@
 
 import { isNonEmptyStringArg, checkProtocol } from "./util.mjs";
 
-export const IRIS_HOST = "service.iris.edu";
 export const EARTHSCOPE_HOST = "service.earthscope.org";
+export const IRIS_HOST = EARTHSCOPE_HOST;
 
 export const FDSNWS_PATH_BASE = "fdsnws";
 export const IRISWS_PATH_BASE = "irisws";

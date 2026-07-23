@@ -57,8 +57,8 @@ const StreamsResult=  z.object({
 });
 export type StreamsResultType = z.infer<typeof StreamsResult>;
 
-export const IRIS_HOST = "rtserve.iris.washington.edu";
 export const EARTHSCOPE_HOST = "rtserve.earthscope.org";
+export const IRIS_HOST = EARTHSCOPE_HOST;
 
 /**
  * Web connection to a Ringserver.

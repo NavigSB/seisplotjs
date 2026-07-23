@@ -42,7 +42,7 @@ export const SERVICE_VERSION = 1;
  * Service name as used in the FDSN DataCenters registry,
  * https://www.fdsn.org/datacenters
  */
-export const SERVICE_NAME = `irisws-${SYNGINE_SERVICE}-${SERVICE_VERSION}`;
+export const SERVICE_NAME = `${IRISWS_PATH_BASE}-${SYNGINE_SERVICE}-${SERVICE_VERSION}`;
 
 export function calcMoment(Mw: number): number {
   return 10.0 ** ((Mw / 2.0 * 3.0 + 9.1));
@@ -51,8 +51,8 @@ export function calcMoment(Mw: number): number {
 /**
  * Query to a syngine web service.
  *
- * @see https://service.iris.edu/irisws/syngine/1/
- * @param host optional host to connect to, defaults to IRIS
+ * @see https://service.earthscope.org/irisws/syngine/1/
+ * @param host optional host to connect to, defaults to Earthscope
  */
 export class SyngineQuery extends FDSNCommon {
 

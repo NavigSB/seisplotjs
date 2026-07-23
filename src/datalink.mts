@@ -60,8 +60,9 @@ export const ENDSTREAM = "ENDSTREAM";
 export const MSEED_TYPE = "/MSEED";
 export const MSEED3_TYPE = "/MSEED3";
 export const JSON_TYPE = "/JSON";
-export const IRIS_RINGSERVER_URL = "wss://rtserve.iris.washington.edu/datalink";
 export const EARTHSCOPE_RINGSERVER_URL = "wss://rtserve.earthscope.org/datalink";
+// just in case used via export
+export const IRIS_RINGSERVER_URL = EARTHSCOPE_RINGSERVER_URL;
 
 export function extractDLProto(lines: Array<string>): string {
   for (let line of lines) {
@@ -87,7 +88,7 @@ const defaultHandleResponse = function (dlResponse: DataLinkResponse) {
  * sends the datalink protocol over a websocket.
  *
  * Currently only the IRIS
- * ringserver, https://github.com/iris-edu/ringserver,
+ * ringserver, https://github.com/EarthScope/ringserver,
  * supports websockets, but it may be possible to use third party
  * tools to proxy the websocket to a TCP datalink socket.
  *

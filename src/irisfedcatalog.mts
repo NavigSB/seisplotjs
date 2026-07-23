@@ -52,7 +52,7 @@ export const SERVICE_VERSION = 1;
  * Service name as used in the FDSN DataCenters registry,
  * https://www.fdsn.org/datacenters
  */
-export const SERVICE_NAME = `irisws-${IRISFEDCAT_SERVICE}-${SERVICE_VERSION}`;
+export const SERVICE_NAME = `${IRISWS_PATH_BASE}-${IRISFEDCAT_SERVICE}-${SERVICE_VERSION}`;
 export const TARGET_DATASELECT = "dataselect";
 export const TARGET_STATION = "station";
 
@@ -144,10 +144,10 @@ export class FedCatalogResult {
 }
 
 /**
- * Query to a IRIS FedCatalog web service.
+ * Query to a Earthscope FedCatalog web service.
  *
- * @see https://service.iris.edu/irisws/fedcatalog/1/
- * @param host optional host to connect to, defaults to IRIS
+ * @see https://service.earthscope.org/irisws/fedcatalog/1/
+ * @param host optional host to connect to, defaults to Earthscope
  */
 export class FedCatalogQuery extends FDSNCommon {
   /** @private */
@@ -230,7 +230,7 @@ export class FedCatalogQuery extends FDSNCommon {
   /**
    * Construct a query
    *
-   * @param host the host to connect to , defaults to service.iris.edu
+   * @param host the host to connect to , defaults to service.earthscope.org
    */
   constructor(host?: string) {
     if (!isNonEmptyStringArg(host)) {

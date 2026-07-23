@@ -30,7 +30,7 @@ export const SVG_FORMAT = "svg";
 export const TRAVELTIME_SERVICE = "traveltime";
 
 /**
- * Type for json returned by iris traveltime web service
+ * Type for json returned by Earthscope traveltime web service
  *
  */
 export type TraveltimeJsonType = {
@@ -157,8 +157,8 @@ export function createOriginArrival(distdeg: number): TraveltimeArrivalType {
 }
 
 /**
- * Query to the IRIS traveltime webservice, based on the TauP Toolkit. See
- * https://service.iris.edu/irisws/traveltime/1/ and
+ * Query to the Earthscope traveltime webservice, based on the TauP Toolkit. See
+ * https://service.earthscope.org/irisws/traveltime/1/ and
  * https://www.seis.sc.edu/TauP/
  *
  * @param host optional host to connect to, defaults to IRIS
