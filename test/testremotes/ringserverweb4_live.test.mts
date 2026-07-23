@@ -45,7 +45,7 @@ test("do usc id test", () => {
     expect(id.seedlink_protocol[0]).toContain("SLPROTO:4.0");
     expect(id.seedlink_protocol[1]).toContain("SLPROTO:3.1");
   });
-});
+}, 10* 1000);
 
 
 
