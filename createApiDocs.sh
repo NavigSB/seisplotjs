@@ -197,7 +197,7 @@ EOF
     #echo npx documentation build -f ${format} -o docs/api/${jsfile}${md} --document-exported --github --project-name seisplotjs.${jsfile} src/${jsfile}/[a-hj-z]*.mts
     #npx documentation build -f ${format} -o docs/api/${jsfile}${md} --document-exported --github --project-name seisplotjs.${jsfile} src/${jsfile}
   else
-    echo unknown file ${f} -> ${jsfile}
+    echo unknown file ${f}  ${jsfile}
   fi
   if [[ 'html' == "$format" ]]
   then
