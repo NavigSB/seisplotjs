@@ -2,7 +2,7 @@
 
 format=html
 md='.md'
-github_branch='version3.1'
+github_branch='main'
 
 
 if [[ 'html' == "$format"  ]]
@@ -144,16 +144,16 @@ if [ -e docs/tutorial/8_andmore_part.html ]; then
   rm docs/tutorial/8_andmore_part.html
 fi
 
-for path in src/*.ts
+# documentation seems unhappy with src/*.mts, so run on output mjs files
+for path in dist/*.mjs
 do
   f=${path##*/}
-  jsfile=${f%.ts}
-  flowfile=${jsfile%.flow}
+  jsfile=${f%.mjs}
   if [  "${jsfile}" == "index_node" ]  || [ "${jsfile}" == "index" ]; then
     # skip index files
     continue
   fi
-  if [ -e src/${jsfile}.ts ]
+  if [ -e src/${jsfile}.mts ]
   then
     descText=""
     descArg=""
@@ -172,8 +172,9 @@ do
     done
     if [ 'index' != "$jsfile" ] && [ 'index_node' != "$jsfile" ]
     then
-      #echo npx documentation build --parse-extension ts -f ${format} -o docs/api/${jsfile}${md} --document-exported --github  --project-name seisplotjs.${jsfile} src/${jsfile}.ts
-      npx documentation build --parse-extension ts -f ${format} -o docs/api/${jsfile}${md} --document-exported --github  --project-name seisplotjs.${jsfile} src/${jsfile}.ts
+      #echo npx documentation build --parse-extension ts -f ${format} -o docs/api/${jsfile}${md} --document-exported --github  --project-name seisplotjs.${jsfile} src/${jsfile}.mts
+      echo npx documentation build --parse-extension mjs -f ${format} -o docs/api/${jsfile}${md} --document-exported --github  --project-name seisplotjs.${jsfile} dist/${jsfile}.mjs
+      npx documentation build --parse-extension mjs -f ${format} -o docs/api/${jsfile}${md} --document-exported --github  --project-name seisplotjs.${jsfile} dist/${jsfile}.mjs
       if [ $? -ne 0 ]
       then
         exit $?
@@ -184,7 +185,7 @@ do
       fi
       # modules links for README.md
       cat >> README_part.md <<EOF
-  * [${jsfile}](https://crotwell.github.io/seisplotjs/api/${jsfile}.html) [(source)](https://github.com/crotwell/seisplotjs/blob/${github_branch}/src/${jsfile}.ts) ${descText}
+  * [${jsfile}](https://crotwell.github.io/seisplotjs/api/${jsfile}.html) [(source)](https://github.com/crotwell/seisplotjs/blob/${github_branch}/src/${jsfile}.mts) ${descText}
 EOF
 
     fi
@@ -193,21 +194,21 @@ EOF
     echo
     echo WARN: doc script doesnot deal with subdirs in src yet
     echo
-    #echo npx documentation build -f ${format} -o docs/api/${jsfile}${md} --document-exported --github --project-name seisplotjs.${jsfile} src/${jsfile}/[a-hj-z]*.ts
+    #echo npx documentation build -f ${format} -o docs/api/${jsfile}${md} --document-exported --github --project-name seisplotjs.${jsfile} src/${jsfile}/[a-hj-z]*.mts
     #npx documentation build -f ${format} -o docs/api/${jsfile}${md} --document-exported --github --project-name seisplotjs.${jsfile} src/${jsfile}
   else
-    echo unknown file ${f}
+    echo unknown file ${f} -> ${jsfile}
   fi
   if [[ 'html' == "$format" ]]
   then
     # entry of index.html
     cat >> docs/api/index.html <<EOF
-      <li><a href="${jsfile}${md}.html">${jsfile}</a> ( <a href="https://github.com/crotwell/seisplotjs/blob/${github_branch}/src/${jsfile}.ts">source</a> ) - ${descTextHtml}</li>
+      <li><a href="${jsfile}${md}.html">${jsfile}</a> ( <a href="https://github.com/crotwell/seisplotjs/blob/${github_branch}/src/${jsfile}.mts">source</a> ) - ${descTextHtml}</li>
 EOF
 
     # also for tutorial8 "and more" entry of index.html
     cat >> docs/tutorial/8_andmore_part.html <<EOF
-      <li><a href="../api/${jsfile}${md}.html">${jsfile}</a> ( <a href="https://github.com/crotwell/seisplotjs/blob/${github_branch}/src/${jsfile}.ts">source</a> ) - ${descTextHtml}</li>
+      <li><a href="../api/${jsfile}${md}.html">${jsfile}</a> ( <a href="https://github.com/crotwell/seisplotjs/blob/${github_branch}/src/${jsfile}.mts">source</a> ) - ${descTextHtml}</li>
 EOF
   fi
 done
@@ -238,7 +239,7 @@ then
   cp docs/api/assets/split.css docs/.
   for f in src/*
   do
-    jsfile=`basename ${f} .ts`
+    jsfile=`basename ${f} .mts`
     if [ -d docs/api/${jsfile} ]
     then
       rm -r docs/api/${jsfile}

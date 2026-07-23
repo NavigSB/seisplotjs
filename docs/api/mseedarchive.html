@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>seisplotjs 3.2.4 | Documentation</title>
+  <title>seisplotjs 3.2.6 | Documentation</title>
   <meta name='description' content='Javascript library for parsing, manipulating and displaying seismic data.'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>seisplotjs</h3>
-          <div class='mb1'><code>3.2.4</code></div>
+          <div class='mb1'><code>3.2.6</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -50,30 +50,6 @@
                   
                     <ul class='list-reset py1-ul pl1'>
                       <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#mseedarchive_rooturl'
-                        class='regular pre-open'>
-                        #_rootUrl
-                      </a></li>
-                      
-                      <li><a
-                        href='#mseedarchive_pattern'
-                        class='regular pre-open'>
-                        #_pattern
-                      </a></li>
-                      
-                      <li><a
-                        href='#mseedarchive_recordsize'
-                        class='regular pre-open'>
-                        #_recordSize
-                      </a></li>
-                      
-                      <li><a
-                        href='#mseedarchive_timeoutsec'
-                        class='regular pre-open'>
-                        #_timeoutSec
-                      </a></li>
                       
                       <li><a
                         href='#mseedarchiverooturl'
@@ -197,8 +173,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L14-L14'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L13-L13'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -250,8 +226,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L35-L268'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L33-L209'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -274,7 +250,7 @@ using a time range large enough to get all overlaps
 based on the smallest sample rate per channel band code
 and record size, which defaults to 512.</p>
 
-    <div class='pre p1 fill-light mt0'>new MSeedArchive(rootUrl: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, pattern: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+    <div class='pre p1 fill-light mt0'>new MSeedArchive(rootUrl: any, pattern: any)</div>
   
   
 
@@ -291,7 +267,7 @@ and record size, which defaults to 512.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>rootUrl</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>rootUrl</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -299,7 +275,7 @@ and record size, which defaults to 512.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>pattern</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>pattern</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -324,254 +300,6 @@ and record size, which defaults to 512.</p>
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
-    <div class='border-bottom' id='mseedarchive_rooturl'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>_rootUrl</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L36-L36'>
-      <span>src/mseedarchive.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>_rootUrl</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='mseedarchive_pattern'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>_pattern</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L37-L37'>
-      <span>src/mseedarchive.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>_pattern</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='mseedarchive_recordsize'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>_recordSize</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L38-L38'>
-      <span>src/mseedarchive.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>_recordSize</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='mseedarchive_timeoutsec'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>_timeoutSec</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L39-L39'>
-      <span>src/mseedarchive.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>_timeoutSec</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
     <div class='border-bottom' id='mseedarchiverooturl'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -586,8 +314,8 @@ and record size, which defaults to 512.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L49-L51'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L41-L43'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -596,11 +324,6 @@ and record size, which defaults to 512.</p>
   
     <div class='pre p1 fill-light mt0'>rootUrl</div>
   
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
   
 
   
@@ -614,11 +337,6 @@ and record size, which defaults to 512.</p>
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-    
   
 
   
@@ -653,8 +371,8 @@ and record size, which defaults to 512.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L53-L55'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L44-L46'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -663,11 +381,6 @@ and record size, which defaults to 512.</p>
   
     <div class='pre p1 fill-light mt0'>pattern</div>
   
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
   
 
   
@@ -681,11 +394,6 @@ and record size, which defaults to 512.</p>
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-    
   
 
   
@@ -720,8 +428,8 @@ and record size, which defaults to 512.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L57-L59'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L47-L49'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -730,11 +438,6 @@ and record size, which defaults to 512.</p>
   
     <div class='pre p1 fill-light mt0'>recordSize</div>
   
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
   
 
   
@@ -748,11 +451,6 @@ and record size, which defaults to 512.</p>
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-    
   
 
   
@@ -787,8 +485,8 @@ and record size, which defaults to 512.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L75-L90'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L64-L78'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -806,7 +504,7 @@ by ringserver are supported here. Must only include:</p>
 <li>H  hour, 2 digits zero padded</li>
 </ul>
 
-    <div class='pre p1 fill-light mt0'>checkPattern(p: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+    <div class='pre p1 fill-light mt0'>checkPattern(p: any): any</div>
   
   
 
@@ -823,7 +521,7 @@ by ringserver are supported here. Must only include:</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>p</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>p</span> <code class='quiet'>(any)</code>
 	    mseed archive pattern string
 
           </div>
@@ -838,7 +536,7 @@ by ringserver are supported here. Must only include:</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+      <code>any</code>:
         true if all flags are allowed
 
       
@@ -877,8 +575,8 @@ by ringserver are supported here. Must only include:</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L102-L156'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L89-L129'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -890,7 +588,7 @@ the given time window based on record size,
 the minimum sample rate
 for the channel band code and the given time window.</p>
 
-    <div class='pre p1 fill-light mt0'>loadSeismograms(channelTimeList: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;SeismogramDisplayData>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;SeismogramDisplayData>></div>
+    <div class='pre p1 fill-light mt0'>loadSeismograms(channelTimeList: any): any</div>
   
   
 
@@ -907,7 +605,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>channelTimeList</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;SeismogramDisplayData>)</code>
+            <span class='code bold'>channelTimeList</span> <code class='quiet'>(any)</code>
 	    request channels and time windows
 
           </div>
@@ -922,7 +620,7 @@ for the channel band code and the given time window.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;SeismogramDisplayData>></code>:
+      <code>any</code>:
         Promise to the same SeismogramDisplayData array, but with seismograms populated
 
       
@@ -961,8 +659,8 @@ for the channel band code and the given time window.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L166-L180'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L138-L140'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -970,7 +668,7 @@ for the channel band code and the given time window.</p>
 
   <p>Loads miniseed records based on channel and time window.</p>
 
-    <div class='pre p1 fill-light mt0'>loadDataForChannel(channel: Channel, startTime: DateTime, endTime: DateTime): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;miniseed.DataRecord>></div>
+    <div class='pre p1 fill-light mt0'>loadDataForChannel(channel: any, startTime: any, endTime: any): any</div>
   
   
 
@@ -987,7 +685,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>channel</span> <code class='quiet'>(Channel)</code>
+            <span class='code bold'>channel</span> <code class='quiet'>(any)</code>
 	    channel to request
 
           </div>
@@ -996,7 +694,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>startTime</span> <code class='quiet'>(DateTime)</code>
+            <span class='code bold'>startTime</span> <code class='quiet'>(any)</code>
 	    start time
 
           </div>
@@ -1005,7 +703,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>endTime</span> <code class='quiet'>(DateTime)</code>
+            <span class='code bold'>endTime</span> <code class='quiet'>(any)</code>
 	    end time
 
           </div>
@@ -1020,7 +718,7 @@ for the channel band code and the given time window.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;miniseed.DataRecord>></code>:
+      <code>any</code>:
         Promise to array of miniseed records
 
       
@@ -1049,7 +747,7 @@ for the channel band code and the given time window.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>loadData(net, sta, loc, chan, startTime, endTime, sampleRate?)</span>
+            <span class='code strong strong truncate'>loadData(net, sta, loc, chan, startTime, endTime, sampleRate)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1059,8 +757,8 @@ for the channel band code and the given time window.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L194-L236'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L153-L179'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -1068,7 +766,7 @@ for the channel band code and the given time window.</p>
 
   <p>Loads miniseed records based on string channel codes.</p>
 
-    <div class='pre p1 fill-light mt0'>loadData(net: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, sta: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, loc: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chan: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, startTime: DateTime, endTime: DateTime, sampleRate: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;miniseed.DataRecord>></div>
+    <div class='pre p1 fill-light mt0'>loadData(net: any, sta: any, loc: any, chan: any, startTime: any, endTime: any, sampleRate: any): any</div>
   
   
 
@@ -1085,7 +783,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>net</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>net</span> <code class='quiet'>(any)</code>
 	    network code
 
           </div>
@@ -1094,7 +792,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>sta</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>sta</span> <code class='quiet'>(any)</code>
 	    station code
 
           </div>
@@ -1103,7 +801,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>loc</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>loc</span> <code class='quiet'>(any)</code>
 	    location code
 
           </div>
@@ -1112,7 +810,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>chan</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>chan</span> <code class='quiet'>(any)</code>
 	    channel code
 
           </div>
@@ -1121,7 +819,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>startTime</span> <code class='quiet'>(DateTime)</code>
+            <span class='code bold'>startTime</span> <code class='quiet'>(any)</code>
 	    start time
 
           </div>
@@ -1130,7 +828,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>endTime</span> <code class='quiet'>(DateTime)</code>
+            <span class='code bold'>endTime</span> <code class='quiet'>(any)</code>
 	    end time
 
           </div>
@@ -1139,7 +837,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>sampleRate</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?)</code>
+            <span class='code bold'>sampleRate</span> <code class='quiet'>(any)</code>
 	    known sample rate for this channel
 
           </div>
@@ -1154,7 +852,7 @@ for the channel band code and the given time window.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;miniseed.DataRecord>></code>:
+      <code>any</code>:
         Promise to array of miniseed records
 
       
@@ -1193,8 +891,8 @@ for the channel band code and the given time window.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L247-L253'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L189-L195'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -1202,7 +900,7 @@ for the channel band code and the given time window.</p>
 
   <p>Replaces codes from channel in base pattern.</p>
 
-    <div class='pre p1 fill-light mt0'>fillBasePattern(net: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, sta: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, loc: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, chan: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+    <div class='pre p1 fill-light mt0'>fillBasePattern(net: any, sta: any, loc: any, chan: any): any</div>
   
   
 
@@ -1219,7 +917,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>net</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>net</span> <code class='quiet'>(any)</code>
 	    string to replace '%n'
 
           </div>
@@ -1228,7 +926,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>sta</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>sta</span> <code class='quiet'>(any)</code>
 	    string to replace '%s'
 
           </div>
@@ -1237,7 +935,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>loc</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>loc</span> <code class='quiet'>(any)</code>
 	    string to replace '%l'
 
           </div>
@@ -1246,7 +944,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>chan</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>chan</span> <code class='quiet'>(any)</code>
 	    string to replace '%c'
 
           </div>
@@ -1261,7 +959,7 @@ for the channel band code and the given time window.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+      <code>any</code>:
         new string with channel replacements made
 
       
@@ -1300,8 +998,8 @@ for the channel band code and the given time window.</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L262-L267'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L203-L208'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -1309,7 +1007,7 @@ for the channel band code and the given time window.</p>
 
   <p>Replaces time entries ( %Y, %j, %H ) in pattern.</p>
 
-    <div class='pre p1 fill-light mt0'>fillTimePattern(basePattern: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, t: DateTime): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+    <div class='pre p1 fill-light mt0'>fillTimePattern(basePattern: any, t: any): any</div>
   
   
 
@@ -1326,7 +1024,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>basePattern</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>basePattern</span> <code class='quiet'>(any)</code>
 	    pattern to replace in
 
           </div>
@@ -1335,7 +1033,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>t</span> <code class='quiet'>(DateTime)</code>
+            <span class='code bold'>t</span> <code class='quiet'>(any)</code>
 	    DateTime in time
 
           </div>
@@ -1350,7 +1048,7 @@ for the channel band code and the given time window.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+      <code>any</code>:
         string with time replaces
 
       
@@ -1397,15 +1095,15 @@ for the channel band code and the given time window.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L269-L325'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L210-L260'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>loadDataRecords(urlList: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>, fetchInit: RequestInit?, timeoutSec: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;miniseed.DataRecord>></div>
+    <div class='pre p1 fill-light mt0'>loadDataRecords(urlList: any, fetchInit: any, timeoutSec: any)</div>
   
   
 
@@ -1422,7 +1120,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>urlList</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</code>
+            <span class='code bold'>urlList</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1430,7 +1128,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>fetchInit</span> <code class='quiet'>(RequestInit?)</code>
+            <span class='code bold'>fetchInit</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1438,7 +1136,7 @@ for the channel band code and the given time window.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>timeoutSec</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?)</code>
+            <span class='code bold'>timeoutSec</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1449,11 +1147,6 @@ for the channel band code and the given time window.</p>
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;miniseed.DataRecord>></code>
-    
   
 
   
@@ -1484,8 +1177,8 @@ for the channel band code and the given time window.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L334-L378'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L268-L300'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -1494,7 +1187,7 @@ for the channel band code and the given time window.</p>
   <p>Gives the maximum sample rate for the channel, based on the
 band code, first char, of the channel code.</p>
 
-    <div class='pre p1 fill-light mt0'>maxSampleRate(chan: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+    <div class='pre p1 fill-light mt0'>maxSampleRate(chan: any): any</div>
   
   
 
@@ -1511,7 +1204,7 @@ band code, first char, of the channel code.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>chan</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>chan</span> <code class='quiet'>(any)</code>
 	    channel code like BHZ, only the first letter is used
 
           </div>
@@ -1526,7 +1219,7 @@ band code, first char, of the channel code.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+      <code>any</code>:
         mimumum sample rate this could be
 
       
@@ -1561,8 +1254,8 @@ band code, first char, of the channel code.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L387-L434'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L308-L343'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -1571,7 +1264,7 @@ band code, first char, of the channel code.</p>
   <p>Gives the minimum sample rate for the channel, based on the
 band code, first char, of the channel code.</p>
 
-    <div class='pre p1 fill-light mt0'>minSampleRate(chan: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+    <div class='pre p1 fill-light mt0'>minSampleRate(chan: any): any</div>
   
   
 
@@ -1588,7 +1281,7 @@ band code, first char, of the channel code.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>chan</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>chan</span> <code class='quiet'>(any)</code>
 	    channel code like BHZ, only the first letter is used
 
           </div>
@@ -1603,7 +1296,7 @@ band code, first char, of the channel code.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+      <code>any</code>:
         mimumum sample rate this could be
 
       
@@ -1638,8 +1331,8 @@ band code, first char, of the channel code.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseedarchive.ts#L447-L452'>
-      <span>src/mseedarchive.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseedarchive.mjs#L355-L357'>
+      <span>dist/mseedarchive.mjs</span>
       </a>
     
   </div>
@@ -1650,7 +1343,7 @@ given the record size (usually 512 or 4096) and the sample rate (Hertz).
 This assumes 40 bytes of header and maximum compression of 2 samples
 per byte (4 bit per sample) which is the best Steim2.</p>
 
-    <div class='pre p1 fill-light mt0'>maxTimeForRecord(recordSize: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, sampleRate: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): Duration</div>
+    <div class='pre p1 fill-light mt0'>maxTimeForRecord(recordSize: any, sampleRate: any): any</div>
   
   
 
@@ -1667,7 +1360,7 @@ per byte (4 bit per sample) which is the best Steim2.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>recordSize</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>recordSize</span> <code class='quiet'>(any)</code>
 	    record size (usually 512 or 4096)
 
           </div>
@@ -1676,7 +1369,7 @@ per byte (4 bit per sample) which is the best Steim2.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>sampleRate</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>sampleRate</span> <code class='quiet'>(any)</code>
 	    sample rate of record
 
           </div>
@@ -1691,7 +1384,7 @@ per byte (4 bit per sample) which is the best Steim2.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>Duration</code>:
+      <code>any</code>:
         maximum interval of time that a full record could cover when
 compression is at its most efficient
 

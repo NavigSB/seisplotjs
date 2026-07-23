@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>seisplotjs 3.2.4 | Documentation</title>
+  <title>seisplotjs 3.2.6 | Documentation</title>
   <meta name='description' content='Javascript library for parsing, manipulating and displaying seismic data.'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>seisplotjs</h3>
-          <div class='mb1'><code>3.2.4</code></div>
+          <div class='mb1'><code>3.2.6</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -227,8 +227,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L20-L20'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L6-L6'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
@@ -285,15 +285,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L22-L36'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L7-L21'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>ehToQuake(exHead: MS3ExtraHeader): (Quake | null)</div>
+    <div class='pre p1 fill-light mt0'>ehToQuake(exHead: any)</div>
   
   
 
@@ -310,7 +310,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>exHead</span> <code class='quiet'>(MS3ExtraHeader)</code>
+            <span class='code bold'>exHead</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -321,11 +321,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(Quake | null)</code>
-    
   
 
   
@@ -356,15 +351,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L38-L61'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L22-L47'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>quakeToEH(quake: Quake): EHEvent</div>
+    <div class='pre p1 fill-light mt0'>quakeToEH(quake: any)</div>
   
   
 
@@ -381,7 +376,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>quake</span> <code class='quiet'>(Quake)</code>
+            <span class='code bold'>quake</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -392,11 +387,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>EHEvent</code>
-    
   
 
   
@@ -427,15 +417,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L63-L72'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L48-L57'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>channelToEH(channel: Channel): EHChannel</div>
+    <div class='pre p1 fill-light mt0'>channelToEH(channel: any)</div>
   
   
 
@@ -452,7 +442,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>channel</span> <code class='quiet'>(Channel)</code>
+            <span class='code bold'>channel</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -463,11 +453,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>EHChannel</code>
-    
   
 
   
@@ -498,15 +483,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L74-L93'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L58-L87'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>ehToChannel(exHead: MS3ExtraHeader, sid: FDSNSourceId): (Channel | null)</div>
+    <div class='pre p1 fill-light mt0'>ehToChannel(exHead: any, sid: any)</div>
   
   
 
@@ -523,7 +508,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>exHead</span> <code class='quiet'>(MS3ExtraHeader)</code>
+            <span class='code bold'>exHead</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -531,7 +516,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>sid</span> <code class='quiet'>(FDSNSourceId)</code>
+            <span class='code bold'>sid</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -542,11 +527,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(Channel | null)</code>
-    
   
 
   
@@ -577,15 +557,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L95-L105'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L88-L98'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>markerToEH(mark: MarkerType): EHMarker</div>
+    <div class='pre p1 fill-light mt0'>markerToEH(mark: any)</div>
   
   
 
@@ -602,7 +582,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>mark</span> <code class='quiet'>(MarkerType)</code>
+            <span class='code bold'>mark</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -613,11 +593,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>EHMarker</code>
-    
   
 
   
@@ -648,15 +623,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L107-L115'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L99-L107'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>markerTypeFromEH(mtype: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+    <div class='pre p1 fill-light mt0'>markerTypeFromEH(mtype: any)</div>
   
   
 
@@ -673,7 +648,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>mtype</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>mtype</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -684,11 +659,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-    
   
 
   
@@ -719,15 +689,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L117-L131'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L108-L122'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>ehToMarkers(exHead: MS3ExtraHeader): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;MarkerType></div>
+    <div class='pre p1 fill-light mt0'>ehToMarkers(exHead: any)</div>
   
   
 
@@ -744,7 +714,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>exHead</span> <code class='quiet'>(MS3ExtraHeader)</code>
+            <span class='code bold'>exHead</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -755,11 +725,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;MarkerType></code>
-    
   
 
   
@@ -790,15 +755,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L133-L147'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L123-L138'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>extractBagEH(jsonEH: Record&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>): (EHBag | null)</div>
+    <div class='pre p1 fill-light mt0'>extractBagEH(jsonEH: any)</div>
   
   
 
@@ -815,7 +780,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>jsonEH</span> <code class='quiet'>(Record&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, any>)</code>
+            <span class='code bold'>jsonEH</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -826,11 +791,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>(EHBag | null)</code>
-    
   
 
   
@@ -861,15 +821,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L149-L156'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L139-L147'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>createBagEH(): EHBag</div>
+    <div class='pre p1 fill-light mt0'>createBagEH()</div>
   
   
 
@@ -884,11 +844,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>EHBag</code>
-    
   
 
   
@@ -919,8 +874,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L166-L194'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L154-L181'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
@@ -995,8 +950,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L202-L211'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L188-L197'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
@@ -1071,8 +1026,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L219-L228'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L204-L213'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
@@ -1147,8 +1102,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L236-L243'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L220-L227'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
@@ -1223,8 +1178,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L251-L259'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L234-L242'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
@@ -1299,8 +1254,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L268-L277'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L249-L258'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
@@ -1375,8 +1330,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L285-L292'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L265-L272'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>
@@ -1451,8 +1406,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/mseed3eh.ts#L300-L327'>
-      <span>src/mseed3eh.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/mseed3eh.mjs#L279-L305'>
+      <span>dist/mseed3eh.mjs</span>
       </a>
     
   </div>

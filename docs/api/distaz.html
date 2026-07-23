@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>seisplotjs 3.2.4 | Documentation</title>
+  <title>seisplotjs 3.2.6 | Documentation</title>
   <meta name='description' content='Javascript library for parsing, manipulating and displaying seismic data.'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>seisplotjs</h3>
-          <div class='mb1'><code>3.2.4</code></div>
+          <div class='mb1'><code>3.2.6</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -70,48 +70,6 @@
                   
                     <ul class='list-reset py1-ul pl1'>
                       <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#distazoutputdelta'
-                        class='regular pre-open'>
-                        #delta
-                      </a></li>
-                      
-                      <li><a
-                        href='#distazoutputaz'
-                        class='regular pre-open'>
-                        #az
-                      </a></li>
-                      
-                      <li><a
-                        href='#distazoutputbaz'
-                        class='regular pre-open'>
-                        #baz
-                      </a></li>
-                      
-                      <li><a
-                        href='#distazoutputstalat'
-                        class='regular pre-open'>
-                        #stalat
-                      </a></li>
-                      
-                      <li><a
-                        href='#distazoutputstalon'
-                        class='regular pre-open'>
-                        #stalon
-                      </a></li>
-                      
-                      <li><a
-                        href='#distazoutputevtlat'
-                        class='regular pre-open'>
-                        #evtlat
-                      </a></li>
-                      
-                      <li><a
-                        href='#distazoutputevtlon'
-                        class='regular pre-open'>
-                        #evtlon
-                      </a></li>
                       
                       <li><a
                         href='#distazoutputdistance'
@@ -181,8 +139,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L8-L8'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L7-L7'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -240,8 +198,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L16-L18'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L14-L16'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -249,7 +207,7 @@
 
   <p>Convert degrees into kilometers along the earth surface</p>
 
-    <div class='pre p1 fill-light mt0'>degtokm(deg: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+    <div class='pre p1 fill-light mt0'>degtokm(deg: any): any</div>
   
   
 
@@ -266,7 +224,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>deg</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>deg</span> <code class='quiet'>(any)</code>
 	    degrees to convert
 
           </div>
@@ -281,7 +239,7 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+      <code>any</code>:
         kilometers
 
       
@@ -316,8 +274,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L26-L28'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L23-L25'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -325,7 +283,7 @@
 
   <p>Convert kilometers into degrees along the earth surface</p>
 
-    <div class='pre p1 fill-light mt0'>kmtodeg(km: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+    <div class='pre p1 fill-light mt0'>kmtodeg(km: any): any</div>
   
   
 
@@ -342,7 +300,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>km</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>km</span> <code class='quiet'>(any)</code>
 	    kilometers to convert
 
           </div>
@@ -357,7 +315,7 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
+      <code>any</code>:
         degrees
 
       
@@ -392,15 +350,15 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L29-L63'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L26-L47'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>new DistAzOutput(delta: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, az: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, baz: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+    <div class='pre p1 fill-light mt0'>new DistAzOutput(delta: any, az: any, baz: any)</div>
   
   
 
@@ -417,7 +375,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>delta</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>delta</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -425,7 +383,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>az</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>az</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -433,7 +391,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>baz</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>baz</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -458,440 +416,6 @@
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
-    <div class='border-bottom' id='distazoutputdelta'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>delta</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L30-L30'>
-      <span>src/distaz.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>delta</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='distazoutputaz'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>az</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L31-L31'>
-      <span>src/distaz.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>az</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='distazoutputbaz'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>baz</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L32-L32'>
-      <span>src/distaz.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>baz</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='distazoutputstalat'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>stalat</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L33-L33'>
-      <span>src/distaz.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>stalat</div>
-  
-    <p>
-      Type:
-      (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='distazoutputstalon'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>stalon</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L34-L34'>
-      <span>src/distaz.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>stalon</div>
-  
-    <p>
-      Type:
-      (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='distazoutputevtlat'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>evtlat</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L35-L35'>
-      <span>src/distaz.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>evtlat</div>
-  
-    <p>
-      Type:
-      (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='distazoutputevtlon'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>evtlon</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L36-L36'>
-      <span>src/distaz.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>evtlon</div>
-  
-    <p>
-      Type:
-      (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a>)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
     <div class='border-bottom' id='distazoutputdistance'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -906,8 +430,8 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L44-L46'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L32-L34'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -916,11 +440,6 @@
   
     <div class='pre p1 fill-light mt0'>distance</div>
   
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
   
 
   
@@ -934,11 +453,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-    
   
 
   
@@ -973,8 +487,8 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L48-L50'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L35-L37'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -983,11 +497,6 @@
   
     <div class='pre p1 fill-light mt0'>distanceKm</div>
   
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
   
 
   
@@ -1001,11 +510,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-    
   
 
   
@@ -1040,8 +544,8 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L52-L54'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L38-L40'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -1050,11 +554,6 @@
   
     <div class='pre p1 fill-light mt0'>distanceDeg</div>
   
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
   
 
   
@@ -1068,11 +567,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-    
   
 
   
@@ -1107,8 +601,8 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L56-L58'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L41-L43'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -1117,11 +611,6 @@
   
     <div class='pre p1 fill-light mt0'>azimuth</div>
   
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
   
 
   
@@ -1135,11 +624,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-    
   
 
   
@@ -1174,8 +658,8 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L60-L62'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L44-L46'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -1184,11 +668,6 @@
   
     <div class='pre p1 fill-light mt0'>backazimuth</div>
   
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
-    </p>
-  
   
 
   
@@ -1202,11 +681,6 @@
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-    
   
 
   
@@ -1249,8 +723,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/distaz.ts#L83-L205'>
-      <span>src/distaz.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/distaz.mjs#L66-L169'>
+      <span>dist/distaz.mjs</span>
       </a>
     
   </div>
@@ -1264,7 +738,7 @@
 <p>azimuth is if you stand at point 2 and measure angle between north
 and point 1. I.E. point 1 is the station and point 2 is the event.</p>
 
-    <div class='pre p1 fill-light mt0'>distaz(lat1: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lon1: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lat2: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, lon2: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#distazoutput">DistAzOutput</a></div>
+    <div class='pre p1 fill-light mt0'>distaz(lat1: any, lon1: any, lat2: any, lon2: any): any</div>
   
   
 
@@ -1281,7 +755,7 @@ and point 1. I.E. point 1 is the station and point 2 is the event.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>lat1</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>lat1</span> <code class='quiet'>(any)</code>
 	    Latitude of first point (station) (+N, -S) in degrees
 
           </div>
@@ -1290,7 +764,7 @@ and point 1. I.E. point 1 is the station and point 2 is the event.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>lon1</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>lon1</span> <code class='quiet'>(any)</code>
 	    Longitude of first point(station) (+E, -W) in degrees
 
           </div>
@@ -1299,7 +773,7 @@ and point 1. I.E. point 1 is the station and point 2 is the event.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>lat2</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>lat2</span> <code class='quiet'>(any)</code>
 	    Latitude of second point (event)
 
           </div>
@@ -1308,7 +782,7 @@ and point 1. I.E. point 1 is the station and point 2 is the event.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>lon2</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>lon2</span> <code class='quiet'>(any)</code>
 	    Longitude of second point (event)
 
           </div>
@@ -1323,7 +797,7 @@ and point 1. I.E. point 1 is the station and point 2 is the event.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#distazoutput">DistAzOutput</a></code>:
+      <code>any</code>:
         delta, az, baz in a DistAzOutput
 
       

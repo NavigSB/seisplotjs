@@ -51791,8 +51791,8 @@ var ENDSTREAM = "ENDSTREAM";
 var MSEED_TYPE = "/MSEED";
 var MSEED3_TYPE = "/MSEED3";
 var JSON_TYPE = "/JSON";
-var IRIS_RINGSERVER_URL = "wss://rtserve.iris.washington.edu/datalink";
 var EARTHSCOPE_RINGSERVER_URL = "wss://rtserve.earthscope.org/datalink";
+var IRIS_RINGSERVER_URL = EARTHSCOPE_RINGSERVER_URL;
 function extractDLProto(lines) {
   for (let line of lines) {
     line = line.trim();
@@ -61517,8 +61517,8 @@ __export(fdsncommon_exports, {
   appendToPath: () => appendToPath,
   defaultPortStringForProtocol: () => defaultPortStringForProtocol
 });
-var IRIS_HOST = "service.iris.edu";
 var EARTHSCOPE_HOST = "service.earthscope.org";
+var IRIS_HOST = EARTHSCOPE_HOST;
 var FDSNWS_PATH_BASE = "fdsnws";
 var IRISWS_PATH_BASE = "irisws";
 var LOCALWS_PATH_BASE = "localws";
@@ -70688,7 +70688,7 @@ var StationQuery = class extends FDSNCommon {
   /**
    * Construct a query
    *
-   * @param host the host to connect to , defaults to service.iris.edu
+   * @param host the host to connect to , defaults to service.earthscope.org
    */
   constructor(host) {
     super(STATION_SERVICE, host);
@@ -87980,8 +87980,8 @@ var StreamsResult = external_exports.object({
   stream: external_exports.array(StreamStat2),
   accessTime: external_exports.custom((d) => d instanceof DateTime).optional()
 });
-var IRIS_HOST2 = "rtserve.iris.washington.edu";
 var EARTHSCOPE_HOST2 = "rtserve.earthscope.org";
+var IRIS_HOST2 = EARTHSCOPE_HOST2;
 var RingserverConnection = class {
   constructor(host, port) {
     this.isFDSNSourceId = false;
@@ -89091,7 +89091,7 @@ __export(seismogramloader_exports, {
 // src/irisfedcatalog.mts
 var IRISFEDCAT_SERVICE = "fedcatalog";
 var SERVICE_VERSION5 = 1;
-var SERVICE_NAME5 = `irisws-${IRISFEDCAT_SERVICE}-${SERVICE_VERSION5}`;
+var SERVICE_NAME5 = `${IRISWS_PATH_BASE}-${IRISFEDCAT_SERVICE}-${SERVICE_VERSION5}`;
 var TARGET_DATASELECT = "dataselect";
 var FAKE_EMPTY_TEXT = "\n";
 var FedCatalogDataCenter = class {
@@ -89157,7 +89157,7 @@ var FedCatalogQuery = class _FedCatalogQuery extends FDSNCommon {
   /**
    * Construct a query
    *
-   * @param host the host to connect to , defaults to service.iris.edu
+   * @param host the host to connect to , defaults to service.earthscope.org
    */
   constructor(host) {
     if (!isNonEmptyStringArg(host)) {
@@ -90694,7 +90694,7 @@ __export(syngine_exports, {
 });
 var SYNGINE_SERVICE = "syngine";
 var SERVICE_VERSION6 = 1;
-var SERVICE_NAME6 = `irisws-${SYNGINE_SERVICE}-${SERVICE_VERSION6}`;
+var SERVICE_NAME6 = `${IRISWS_PATH_BASE}-${SYNGINE_SERVICE}-${SERVICE_VERSION6}`;
 function calcMoment(Mw) {
   return 10 ** (Mw / 2 * 3 + 9.1);
 }

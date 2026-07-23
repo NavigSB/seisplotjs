@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>seisplotjs 3.2.4 | Documentation</title>
+  <title>seisplotjs 3.2.6 | Documentation</title>
   <meta name='description' content='Javascript library for parsing, manipulating and displaying seismic data.'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>seisplotjs</h3>
-          <div class='mb1'><code>3.2.4</code></div>
+          <div class='mb1'><code>3.2.6</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -39,16 +39,6 @@
               
                 
                 <li><a
-                  href='#sequenceddatarecord'
-                  class="">
-                  SequencedDataRecord
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
                   href='#seedlinkconnection'
                   class=" toggle-sibling">
                   SeedlinkConnection
@@ -60,66 +50,6 @@
                   
                     <ul class='list-reset py1-ul pl1'>
                       <li class='h5'><span>Instance members</span></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionurl'
-                        class='regular pre-open'>
-                        #url
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionrequestconfig'
-                        class='regular pre-open'>
-                        #requestConfig
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionreceiveminiseedfn'
-                        class='regular pre-open'>
-                        #receiveMiniseedFn
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionerrorhandler'
-                        class='regular pre-open'>
-                        #errorHandler
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionlogcommandfn'
-                        class='regular pre-open'>
-                        #logCommandFn
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionclosefn'
-                        class='regular pre-open'>
-                        #closeFn
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionwebsocket'
-                        class='regular pre-open'>
-                        #webSocket
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionsubprotocol'
-                        class='regular pre-open'>
-                        #subprotocol
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectioncommand'
-                        class='regular pre-open'>
-                        #command
-                      </a></li>
-                      
-                      <li><a
-                        href='#seedlinkconnectionhellolines'
-                        class='regular pre-open'>
-                        #helloLines
-                      </a></li>
                       
                       <li><a
                         href='#seedlinkconnectionsettimecommand'
@@ -221,8 +151,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L11-L11'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L11-L11'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
@@ -274,94 +204,13 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='sequenceddatarecord'>
-      SequencedDataRecord
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L12-L16'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>SequencedDataRecord</div>
-  
-    <p>
-      Type:
-      {rawsequence: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, sequence: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, miniseed: DataRecord}
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>rawsequence</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>sequence</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>miniseed</span> <code class='quiet'>(DataRecord)</code>
-          
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='seedlinkconnection'>
       SeedlinkConnection
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L42-L348'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L36-L311'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
@@ -371,14 +220,14 @@
 The connection is not made until the connect() method is called.
 Note this cannot connect directly to a native TCP socket, instead it
 sends the seedlink protocol over a websocket. Currently only the IRIS
-ringserver, <a href="https://github.com/iris-edu/ringserver">https://github.com/iris-edu/ringserver</a>,
+ringserver, <a href="https://github.com/earthscope/ringserver">https://github.com/earthscope/ringserver</a>,
 supports websockets, but it may be possible to use third party
 tools to proxy the websocket to a TCP seedlink socket.</p>
 <p>The seedlink (ver 3) protocol does not have an official spec document, but
 some details are here:
 <a href="https://www.seiscomp.de/doc/apps/seedlink.html">https://www.seiscomp.de/doc/apps/seedlink.html</a></p>
 
-    <div class='pre p1 fill-light mt0'>new SeedlinkConnection(url: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, requestConfig: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>, receiveMiniseedFn: function (packet: <a href="#sequenceddatarecord">SequencedDataRecord</a>): void, errorHandler: function (error: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>): void)</div>
+    <div class='pre p1 fill-light mt0'>new SeedlinkConnection(url: any, requestConfig: any, receiveMiniseedFn: any, errorHandler: any)</div>
   
   
 
@@ -395,7 +244,7 @@ some details are here:
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>url</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>url</span> <code class='quiet'>(any)</code>
 	    websocket URL to connect to
 
           </div>
@@ -404,7 +253,7 @@ some details are here:
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>requestConfig</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</code>
+            <span class='code bold'>requestConfig</span> <code class='quiet'>(any)</code>
 	    an array of seedlink commands
 like:
 
@@ -417,7 +266,7 @@ like:
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>receiveMiniseedFn</span> <code class='quiet'>(function (packet: <a href="#sequenceddatarecord">SequencedDataRecord</a>): void)</code>
+            <span class='code bold'>receiveMiniseedFn</span> <code class='quiet'>(any)</code>
 	    the callback function that
 will be invoked for each seedlink packet received
 which contains 'sequence', a sequence number
@@ -429,7 +278,7 @@ and 'miniseed', a single miniseed record.
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>errorHandler</span> <code class='quiet'>(function (error: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>): void)</code>
+            <span class='code bold'>errorHandler</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -454,621 +303,6 @@ and 'miniseed', a single miniseed record.
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
-    <div class='border-bottom' id='seedlinkconnectionurl'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>url</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L43-L43'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>url</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectionrequestconfig'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>requestConfig</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L44-L44'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>requestConfig</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectionreceiveminiseedfn'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>receiveMiniseedFn</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L45-L45'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>receiveMiniseedFn</div>
-  
-    <p>
-      Type:
-      function (packet: <a href="#sequenceddatarecord">SequencedDataRecord</a>): void
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectionerrorhandler'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>errorHandler</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L46-L46'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>errorHandler</div>
-  
-    <p>
-      Type:
-      function (error: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>): void
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectionlogcommandfn'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>logCommandFn</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L47-L47'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>logCommandFn</div>
-  
-    <p>
-      Type:
-      (null | function (cmd: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): void)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectionclosefn'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>closeFn</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L48-L48'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>closeFn</div>
-  
-    <p>
-      Type:
-      (null | function (close: <a href="https://developer.mozilla.org/docs/Web/API/CloseEvent">CloseEvent</a>): void)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectionwebsocket'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>webSocket</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L49-L49'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>webSocket</div>
-  
-    <p>
-      Type:
-      (null | <a href="https://developer.mozilla.org/docs/WebSockets">WebSocket</a>)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectionsubprotocol'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>subprotocol</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L50-L50'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>subprotocol</div>
-  
-    <p>
-      Type:
-      (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectioncommand'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>command</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L51-L51'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>command</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='seedlinkconnectionhellolines'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>helloLines</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L52-L52'>
-      <span>src/seedlink.ts</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>helloLines</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
     <div class='border-bottom' id='seedlinkconnectionsettimecommand'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -1083,15 +317,15 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L71-L73'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L49-L51'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>setTimeCommand(startTime: DateTime)</div>
+    <div class='pre p1 fill-light mt0'>setTimeCommand(startTime: any)</div>
   
   
 
@@ -1108,7 +342,7 @@ and 'miniseed', a single miniseed record.
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>startTime</span> <code class='quiet'>(DateTime)</code>
+            <span class='code bold'>startTime</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1153,15 +387,15 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L75-L77'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L52-L54'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>setOnError(errorHandler: function (error: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>): void)</div>
+    <div class='pre p1 fill-light mt0'>setOnError(errorHandler: any)</div>
   
   
 
@@ -1178,7 +412,7 @@ and 'miniseed', a single miniseed record.
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>errorHandler</span> <code class='quiet'>(function (error: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>): void)</code>
+            <span class='code bold'>errorHandler</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1223,15 +457,15 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L79-L81'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L55-L57'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>setOnClose(closeFn: function (close: <a href="https://developer.mozilla.org/docs/Web/API/CloseEvent">CloseEvent</a>): void)</div>
+    <div class='pre p1 fill-light mt0'>setOnClose(closeFn: any)</div>
   
   
 
@@ -1248,7 +482,7 @@ and 'miniseed', a single miniseed record.
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>closeFn</span> <code class='quiet'>(function (close: <a href="https://developer.mozilla.org/docs/Web/API/CloseEvent">CloseEvent</a>): void)</code>
+            <span class='code bold'>closeFn</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1293,8 +527,8 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L84-L118'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L58-L94'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
@@ -1350,15 +584,15 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L120-L168'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L95-L138'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>interactiveConnect(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#seedlinkconnection">SeedlinkConnection</a>></div>
+    <div class='pre p1 fill-light mt0'>interactiveConnect()</div>
   
   
 
@@ -1373,11 +607,6 @@ and 'miniseed', a single miniseed record.
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#seedlinkconnection">SeedlinkConnection</a>></code>
-    
   
 
   
@@ -1412,15 +641,15 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L170-L175'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L139-L144'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>close(): void</div>
+    <div class='pre p1 fill-light mt0'>close()</div>
   
   
 
@@ -1435,11 +664,6 @@ and 'miniseed', a single miniseed record.
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>void</code>
-    
   
 
   
@@ -1474,15 +698,15 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L177-L190'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L145-L159'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>handle(event: <a href="https://developer.mozilla.org/docs/Web/API/MessageEvent">MessageEvent</a>): void</div>
+    <div class='pre p1 fill-light mt0'>handle(event: any)</div>
   
   
 
@@ -1499,7 +723,7 @@ and 'miniseed', a single miniseed record.
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>event</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/API/MessageEvent">MessageEvent</a>)</code>
+            <span class='code bold'>event</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1510,11 +734,6 @@ and 'miniseed', a single miniseed record.
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>void</code>
-    
   
 
   
@@ -1549,15 +768,15 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L192-L235'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L160-L195'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>handleMiniseed(data: ArrayBufferLike): void</div>
+    <div class='pre p1 fill-light mt0'>handleMiniseed(data: any)</div>
   
   
 
@@ -1574,7 +793,7 @@ and 'miniseed', a single miniseed record.
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>data</span> <code class='quiet'>(ArrayBufferLike)</code>
+            <span class='code bold'>data</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -1585,11 +804,6 @@ and 'miniseed', a single miniseed record.
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>void</code>
-    
   
 
   
@@ -1624,15 +838,15 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L237-L239'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L196-L198'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>isConnected(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+    <div class='pre p1 fill-light mt0'>isConnected()</div>
   
   
 
@@ -1647,11 +861,6 @@ and 'miniseed', a single miniseed record.
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
-    
   
 
   
@@ -1686,8 +895,8 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L246-L280'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L204-L240'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
@@ -1695,7 +904,7 @@ and 'miniseed', a single miniseed record.
 
   <p>Sends initial HELLO to server and waits for response.</p>
 
-    <div class='pre p1 fill-light mt0'>sendHello(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;[<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]></div>
+    <div class='pre p1 fill-light mt0'>sendHello(): any</div>
   
   
 
@@ -1713,7 +922,7 @@ and 'miniseed', a single miniseed record.
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;[<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>]></code>:
+      <code>any</code>:
         Promise that resolves to the response from the server.
 
       
@@ -1752,8 +961,8 @@ and 'miniseed', a single miniseed record.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L290-L296'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L249-L255'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
@@ -1762,7 +971,7 @@ and 'miniseed', a single miniseed record.
   <p>Sends an array of commands, each as a Promise waiting for the 'OK' response
 before sending the next.</p>
 
-    <div class='pre p1 fill-light mt0'>sendCmdArray(cmd: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></div>
+    <div class='pre p1 fill-light mt0'>sendCmdArray(cmd: any): any</div>
   
   
 
@@ -1779,7 +988,7 @@ before sending the next.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>cmd</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>)</code>
+            <span class='code bold'>cmd</span> <code class='quiet'>(any)</code>
 	    array of commands to send
 
           </div>
@@ -1794,7 +1003,7 @@ before sending the next.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>:
+      <code>any</code>:
         Promise that resolves to the 'OK' returned by the last
 command if successful, or rejects on the first failure.
 
@@ -1834,8 +1043,8 @@ command if successful, or rejects on the first failure.
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/seedlink.ts#L304-L333'>
-      <span>src/seedlink.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/seedlink.mjs#L262-L296'>
+      <span>dist/seedlink.mjs</span>
       </a>
     
   </div>
@@ -1843,7 +1052,7 @@ command if successful, or rejects on the first failure.
 
   <p>creates a Promise that sends a command and waits resolved with the result.</p>
 
-    <div class='pre p1 fill-light mt0'>createCmdPromise(mycmd: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></div>
+    <div class='pre p1 fill-light mt0'>createCmdPromise(mycmd: any): any</div>
   
   
 
@@ -1860,7 +1069,7 @@ command if successful, or rejects on the first failure.
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>mycmd</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>mycmd</span> <code class='quiet'>(any)</code>
 	    command string to send.
 
           </div>
@@ -1875,7 +1084,7 @@ command if successful, or rejects on the first failure.
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>></code>:
+      <code>any</code>:
         Promise that resolves to the reply from the server.
 
       

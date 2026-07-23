@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>seisplotjs 3.2.4 | Documentation</title>
+  <title>seisplotjs 3.2.6 | Documentation</title>
   <meta name='description' content='Javascript library for parsing, manipulating and displaying seismic data.'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>seisplotjs</h3>
-          <div class='mb1'><code>3.2.4</code></div>
+          <div class='mb1'><code>3.2.6</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -107,8 +107,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/cssutil.ts#L6-L6'>
-      <span>src/cssutil.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/cssutil.mjs#L6-L6'>
+      <span>dist/cssutil.mjs</span>
       </a>
     
   </div>
@@ -165,8 +165,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/cssutil.ts#L7-L7'>
-      <span>src/cssutil.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/cssutil.mjs#L7-L7'>
+      <span>dist/cssutil.mjs</span>
       </a>
     
   </div>
@@ -223,8 +223,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/cssutil.ts#L8-L8'>
-      <span>src/cssutil.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/cssutil.mjs#L8-L8'>
+      <span>dist/cssutil.mjs</span>
       </a>
     
   </div>
@@ -281,8 +281,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/cssutil.ts#L19-L45'>
-      <span>src/cssutil.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/cssutil.mjs#L18-L39'>
+      <span>dist/cssutil.mjs</span>
       </a>
     
   </div>
@@ -292,7 +292,7 @@
 as to validity of the css is done, just inserts a style
 element at the beginning of the head.</p>
 
-    <div class='pre p1 fill-light mt0'>insertCSS(cssText: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a></div>
+    <div class='pre p1 fill-light mt0'>insertCSS(cssText: any, id: any): any</div>
   
   
 
@@ -309,7 +309,7 @@ element at the beginning of the head.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>cssText</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>cssText</span> <code class='quiet'>(any)</code>
 	    textual css for insertion
 
           </div>
@@ -318,7 +318,7 @@ element at the beginning of the head.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>id</span> <code class='quiet'>(any)</code>
 	    optional id for style element
 
           </div>
@@ -333,7 +333,7 @@ element at the beginning of the head.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/HTML/Element">HTMLElement</a></code>:
+      <code>any</code>:
         the style html element inserted
 
       
@@ -368,15 +368,15 @@ element at the beginning of the head.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/cssutil.ts#L46-L60'>
-      <span>src/cssutil.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/cssutil.mjs#L40-L51'>
+      <span>dist/cssutil.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>isCSSInserted(id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+    <div class='pre p1 fill-light mt0'>isCSSInserted(id: any)</div>
   
   
 
@@ -393,7 +393,7 @@ element at the beginning of the head.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>id</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -404,11 +404,6 @@ element at the beginning of the head.</p>
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
-    
   
 
   
@@ -439,15 +434,15 @@ element at the beginning of the head.</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/cssutil.ts#L61-L65'>
-      <span>src/cssutil.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/cssutil.mjs#L52-L54'>
+      <span>dist/cssutil.mjs</span>
       </a>
     
   </div>
   
 
   
-    <div class='pre p1 fill-light mt0'>isIdStyleElement(c: <a href="https://developer.mozilla.org/docs/Web/API/Element">Element</a>, id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
+    <div class='pre p1 fill-light mt0'>isIdStyleElement(c: any, id: any)</div>
   
   
 
@@ -464,7 +459,7 @@ element at the beginning of the head.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>c</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/API/Element">Element</a>)</code>
+            <span class='code bold'>c</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -472,7 +467,7 @@ element at the beginning of the head.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>id</span> <code class='quiet'>(any)</code>
 	    
           </div>
           
@@ -483,11 +478,6 @@ element at the beginning of the head.</p>
 
   
 
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
-    
   
 
   

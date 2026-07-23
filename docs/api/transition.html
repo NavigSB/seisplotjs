@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>seisplotjs 3.2.4 | Documentation</title>
+  <title>seisplotjs 3.2.6 | Documentation</title>
   <meta name='description' content='Javascript library for parsing, manipulating and displaying seismic data.'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>seisplotjs</h3>
-          <div class='mb1'><code>3.2.4</code></div>
+          <div class='mb1'><code>3.2.6</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -57,8 +57,8 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/22dbaff85d5de034ce06b04d215b1ba233951cdc/src/transition.ts#L10-L24'>
-      <span>src/transition.ts</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/crotwell/seisplotjs/blob/f2f3a4a3a5851e1b7dc19efdbc24c1de2636690d/dist/transition.mjs#L9-L25'>
+      <span>dist/transition.mjs</span>
       </a>
     
   </div>
@@ -69,7 +69,7 @@ by rescheduling animation frame after completion. Value is calculated from
 the elapsed time with 0 being the beginning time of the transition and
 1 corresponding to the duration given.</p>
 
-    <div class='pre p1 fill-light mt0'>transition(drawFn: function (x: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): void, duration_millis: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+    <div class='pre p1 fill-light mt0'>transition(drawFn: any, duration_millis: any)</div>
   
   
 
@@ -86,7 +86,7 @@ the elapsed time with 0 being the beginning time of the transition and
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>drawFn</span> <code class='quiet'>(function (x: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): void)</code>
+            <span class='code bold'>drawFn</span> <code class='quiet'>(any)</code>
 	    drawing function to call with the value
 
           </div>
@@ -95,7 +95,7 @@ the elapsed time with 0 being the beginning time of the transition and
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>duration_millis</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>duration_millis</span> <code class='quiet'>(any)</code>
 	    milliseconds for the total transition
 
           </div>
