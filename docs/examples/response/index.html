@@ -13,7 +13,7 @@
       is an example of a filter cascade from SIS
       where the symmetry of the FIR filter was wrong, generating a response that
       is not correct. Note the large ripple in the passband.
-      Choosing a channel from IRIS hopefully shows other
+      Choosing a channel from Earthscope hopefully shows other
       more correct responses. You may also paste a URL to a stationxml,
       IRIS stationxml-resp from the NRL,
       or SIS extended stationxml file into the box to plot it.
@@ -24,12 +24,12 @@
       <button id="extstationxml_load">Load</button>
     </div>
     <div>
-      <label>IRIS NRL Url:</label>
-      <input type="text" id="nrl_url" name="nrl_url" value="https://service.iris.edu/irisws/nrl/1/combine?instconfig=sensor_CEADASE_CPHM-500_LP1_PG8_SG2250_STgroundVel%3Adatalogger_EQMet_SMA_FR50&format=stationxml-resp&nodata=404"></input>
+      <label>Earthscope NRL Url:</label>
+      <input type="text" id="nrl_url" name="nrl_url" value="https://service.earthscope.org/irisws/nrl/1/combine?instconfig=sensor_CEADASE_CPHM-500_LP1_PG8_SG2250_STgroundVel%3Adatalogger_EQMet_SMA_FR50&format=stationxml-resp&nodata=404"></input>
       <button id="nrl_load">Load</button>
     </div>
     <div>
-      <label>FDSN StationXML from IRIS:</label>
+      <label>FDSN StationXML from Earthscope:</label>
       <sp-channel-code-input network="CO" station="CASEE" channel="HHZ"></sp-channel-code-input>
       <button id="stationxml_load">Load</button>
     </div>
