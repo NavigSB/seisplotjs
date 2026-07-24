@@ -18,6 +18,8 @@ export {
   OrganizedDisplayItem, ORG_DISP_ITEM, SEISMOGRAPH, MAP
 };
 
+export const ORG_DISPLAY_CSS_ID = "orgdispcss";
+
 export const ORG_DISPLAY = "sp-organized-display";
 
 export const ORG_TYPE = "orgtype";
@@ -71,7 +73,7 @@ export class OrganizedDisplay extends SeisPlotElement {
     div.wrapper {
       height: 100%;
     }
-    `);
+    `, ORG_DISPLAY_CSS_ID);
     this.getShadowRoot().appendChild(wrapper);
   }
   static get observedAttributes() {

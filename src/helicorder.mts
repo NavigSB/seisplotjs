@@ -24,6 +24,7 @@ import {
 
 export const HELI_CLICK_EVENT = "heliclick";
 export const HELI_MOUSE_MOVE_EVENT = "helimousemove";
+export const HELICORDER_CSS_ID = "helicordercss";
 
 
 export const HELICORDER_ELEMENT = "sp-helicorder";
@@ -84,7 +85,7 @@ export class Helicorder extends SeisPlotElement implements IHelicorder {
 
     const wrapper = document.createElement("div");
     wrapper.setAttribute("class", "wrapper");
-    this.addStyle(helicorder_css);
+    this.addStyle(helicorder_css, HELICORDER_CSS_ID);
     this.getShadowRoot().appendChild(wrapper);
     // event listener to transform mouse click into time
     this.addEventListener("click", (evt: Event) => {

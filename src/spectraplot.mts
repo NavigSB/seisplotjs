@@ -25,6 +25,7 @@ import { G_DATA_SELECTOR, AUTO_COLOR_SELECTOR } from "./cssutil.mjs";
 import { drawAxisLabels } from "./axisutil.mjs";
 
 export const SPECTRA_ELEMENT = "sp-spectra";
+export const SPECTA_CSS_ID = "spectracss";
 
 /**
  * Similar to FFTResult, but used for plotting non-fft generated data.
@@ -166,7 +167,7 @@ export class SpectraPlot extends HTMLElement {
 
     const wrapper = document.createElement("div");
     wrapper.setAttribute("class", "wrapper");
-    addStyleToElement(this, spectra_plot_css);
+    addStyleToElement(this, spectra_plot_css, SPECTA_CSS_ID);
     const lineColorsCSS = this.seismographConfig.createCSSForLineColors();
     addStyleToElement(this, lineColorsCSS, COLOR_CSS_ID);
 
