@@ -4,6 +4,7 @@ import { Seismograph } from "./seismograph.mjs";
 import { fftForward } from "./fft.mjs";
 import { SeismographConfig } from "./seismographconfig.mjs";
 import { clearCanvas } from "./seismographutil.mjs";
+import { util } from "./index_node.mjs";
 
 export type WindowFunctionType =
   | "hann"
@@ -15,10 +16,10 @@ const SPECTROGRAM_ELEMENT = "sp-spectrogram";
 export class SpectrogramConfig extends SeismographConfig {
   // Number of time samples in each FFT frame
   fftSize: number = 2048;
-  // Number of samples to overlap (e.g., 512).
-  overlap: number = 1594;
+  // How much to overlap each FFT frame (as a fraction of the window size)
+  overlapPerc: number = 0.95;
   // Minimum time window for each spectrogram slice in seconds - ideally, resulting chunk times will be near this value
-  minChunkTime: number = 0;
+  minChunkTime: number = 10;
   // Type of window function to apply
   windowType: WindowFunctionType = "hann";
   // Frequency range for the spectrogram display in Hz - cannot exceed Nyquist frequency (sampleRate / 2)
@@ -57,7 +58,7 @@ export class Spectrogram extends Seismograph {
 
     const fullSeisDataUnformatted: number[] = [];
     let dataSampleRate;
-    this._seisDataList.forEach((sdd, i) => {
+    this._seisDataList.forEach((sdd) => {
       const xScale = this.timeScaleForSeisDisplayData(sdd, true);
       // const yScale = this.ampScaleForSeisDisplayData(sdd);
       const s = xScale.domain().start?.valueOf();
@@ -102,7 +103,8 @@ export class Spectrogram extends Seismograph {
       height: canvas.height,
       timeRange: [start, end],
       freqRange: [this.spectrogramConfig.freqMin, this.spectrogramConfig.freqMax],
-    }).catch(() => {
+    }).catch((err) => {
+      util.warn(`Error rendering spectrogram: ${err.message}`);
       return;
     });
   }
@@ -161,7 +163,7 @@ class SpectrogramWeb {
     this.model.updateConfig(config);
     if (
       config.fftSize ||
-      config.overlap ||
+      config.overlapPerc ||
       config.minChunkTime ||
       config.windowType ||
       config.freqMin ||
@@ -260,13 +262,6 @@ export class CanvasRenderer {
     const [tStart, tEnd] = timeRange;
     const [fMin, fMax] = freqRange;
 
-    const plotX = this.model.config.margin.left;
-    const plotY = this.model.config.margin.top;
-    const plotW =
-      width - this.model.config.margin.left - this.model.config.margin.right;
-    const plotH =
-      height - this.model.config.margin.bottom - this.model.config.margin.top;
-
     const colorMap = new ColorMap(this.model.config.spectrogramColorMap);
 
     ctx.clearRect(0, 0, width, height);
@@ -277,7 +272,8 @@ export class CanvasRenderer {
 
     const sampleRate = this.model.sampleRate;
     const config = this.model.config;
-    const hopSize = Math.max(1, this.windowSize - config.overlap);
+    const overlap = Math.floor(config.overlapPerc * this.windowSize);
+    const hopSize = Math.max(1, this.windowSize - overlap);
 
     const targetSamples = this.model.config.minChunkTime * sampleRate;
     const hopsPerChunk = Math.ceil(targetSamples / hopSize);
@@ -327,7 +323,7 @@ export class CanvasRenderer {
       if (chunk.image && ctx) {
         ctx.save();
         ctx.beginPath();
-        ctx.rect(plotX, plotY, plotW, plotH);
+        ctx.rect(0, 0, width, height);
         ctx.clip();
 
         this.drawChunk(
@@ -337,10 +333,10 @@ export class CanvasRenderer {
           tEnd,
           fMin,
           fMax,
-          plotX,
-          plotY,
-          plotW,
-          plotH,
+          0,
+          0,
+          width,
+          height,
         );
 
         ctx.restore();
@@ -450,8 +446,9 @@ export class ChunkProcessor {
     config: SpectrogramConfig,
     colormapToRgb: (normalizedVal: number) => [number, number, number],
   ): ImageData {
-    const { minDb, maxDb, overlap } = config;
+    const { minDb, maxDb, overlapPerc } = config;
     const windowSize = this.windowBuffer.length;
+    const overlap = Math.floor(overlapPerc * windowSize);
     const hopSize = Math.max(1, windowSize - overlap);
 
     const numHops = Math.ceil((endIdx - startIdx) / hopSize);
