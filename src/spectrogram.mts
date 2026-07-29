@@ -56,14 +56,13 @@ export class Spectrogram extends Seismograph {
       return;
     clearCanvas(canvas);
 
-    const fullSeisDataUnformatted: number[] = [];
     let dataSampleRate;
     this._seisDataList.forEach((sdd) => {
       const xScale = this.timeScaleForSeisDisplayData(sdd, true);
       // const yScale = this.ampScaleForSeisDisplayData(sdd);
-      const s = xScale.domain().start?.valueOf();
-      const e = xScale.domain().end?.valueOf();
-      if (s == null || e == null || s === e) {
+      const domainStart = xScale.domain().start?.valueOf();
+      const domainEnd = xScale.domain().end?.valueOf();
+      if (domainStart == null || domainEnd == null || domainStart === domainEnd) {
         return;
       }
 
@@ -73,39 +72,44 @@ export class Spectrogram extends Seismograph {
       }
 
       dataSampleRate = seismogram.sampleRate;
-      fullSeisDataUnformatted.push(...seismogram.y);
-    });
 
-    if (dataSampleRate == null)
-      return;
+      if (dataSampleRate == null)
+        return;
 
-    const fullSeisData = new Float32Array(fullSeisDataUnformatted);
-    const durationSec = fullSeisData.length / dataSampleRate;
+      const fullSeisData = new Float32Array(seismogram.y);
+      const durationSec = fullSeisData.length / dataSampleRate;
 
-    // TODO: Do we use durationSec here instead of canvasWidth? durationSec seems to give a much more accurate representation
-    // of the time window, although it slows down the rendering quite a bit
-    const spectrogram = new SpectrogramWeb(
-      this.spectrogramConfig,
-      dataSampleRate,
-      canvas.width,
-    );
-    spectrogram.setData(fullSeisData);
+      // TODO: Do we use durationSec here instead of canvasWidth? durationSec seems to give a much more accurate representation
+      // of the time window, although it slows down the rendering quite a bit
+      const spectrogram = new SpectrogramWeb(
+        this.spectrogramConfig,
+        dataSampleRate,
+        durationSec,
+      );
 
-    const duration = spectrogram.getDuration();
-    const windowSize = durationSec;
+      let seismogramStartSec = seismogram.startTime.valueOf() / 1000 - domainStart;
+      let seismogramEndSec = domainEnd - seismogram.endTime.valueOf() / 1000;
+      let startSamplesToTrim = 0;
+      let endSamplesToTrim = 0;
 
-    const end = Math.max(0.001, duration);
-    const start = end - windowSize;
+      if (seismogramStartSec < 0) {
+        startSamplesToTrim = Math.ceil(-seismogramStartSec * dataSampleRate);
+        seismogramStartSec = 0;
+      }
+      if (seismogramEndSec > durationSec) {
+        endSamplesToTrim = Math.ceil((seismogramEndSec - durationSec) * dataSampleRate);
+        seismogramEndSec = durationSec;
+      }
 
-    spectrogram.render({
-      canvas: canvas,
-      width: canvas.width,
-      height: canvas.height,
-      timeRange: [start, end],
-      freqRange: [this.spectrogramConfig.freqMin, this.spectrogramConfig.freqMax],
-    }).catch((err) => {
-      util.warn(`Error rendering spectrogram: ${err.message}`);
-      return;
+      spectrogram.setData(fullSeisData.slice(startSamplesToTrim, fullSeisData.length - endSamplesToTrim));
+
+      spectrogram.render(
+        canvas,
+        [seismogramStartSec, seismogramEndSec],
+      ).catch((err) => {
+        util.warn(`Error rendering spectrogram: ${err.message}`);
+        return;
+      });
     });
   }
 }
@@ -113,10 +117,7 @@ customElements.define(SPECTROGRAM_ELEMENT, Spectrogram);
 
 export interface RenderOptions {
   canvas: HTMLCanvasElement;
-  width: number;
-  height: number;
   timeRange: [number, number]; // [startTime, endTime]
-  freqRange: [number, number]; // [minFreq, maxFreq]
 }
 
 class SpectrogramWeb {
@@ -141,7 +142,7 @@ class SpectrogramWeb {
     this.renderer.dispose();
   }
 
-  async render(options: RenderOptions) {
+  async render(canvas: HTMLCanvasElement, timeRange: [number, number]) {
     // Default freq range to [0, Nyquist] if not provided
     const nyquist = this.model.sampleRate / 2;
     const freqRange: [number, number] = [0, nyquist];
@@ -156,7 +157,7 @@ class SpectrogramWeb {
       freqRange[1] = Math.min(freqRange[1], nyquist);
     }
 
-    await this.renderer.render(options, freqRange);
+    await this.renderer.render(canvas, timeRange, freqRange);
   }
 
   updateConfig(config: Partial<SpectrogramConfig>) {
@@ -178,10 +179,6 @@ class SpectrogramWeb {
     ) {
       this.renderer.clearCache();
     }
-  }
-
-  getDuration(): number {
-    return this.model.getDuration();
   }
 }
 
@@ -206,10 +203,6 @@ export class SpectrogramModel {
 
   updateConfig(newConfig: Partial<SpectrogramConfig>) {
     Object.assign(this.config, newConfig);
-  }
-
-  getDuration(): number {
-    return this.data ? this.data.length / this.sampleRate : 0;
   }
 }
 
@@ -250,8 +243,7 @@ export class CanvasRenderer {
     return this.setupHiDPICanvas(canvas);
   }
 
-  async render(options: RenderOptions, freqRange: [number, number]) {
-    const { canvas, timeRange } = options;
+  async render(canvas: HTMLCanvasElement, timeRange: [number, number], freqRange: [number, number]) {
     const ctx = this.calibrateCanvas(canvas);
     if (!ctx) {
       return;
