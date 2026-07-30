@@ -84,29 +84,27 @@ export class Spectrogram extends Seismograph {
       const spectrogram = new SpectrogramWeb(
         this.spectrogramConfig,
         dataSampleRate,
-        durationSec,
+        canvas.width,
       );
 
-      let seismogramStartSec = seismogram.startTime.valueOf() / 1000 - domainStart;
-      let seismogramEndSec = domainEnd - seismogram.endTime.valueOf() / 1000;
+      const seismogramStartSec = (seismogram.startTime.valueOf() - domainStart) / 1000;
+      const seismogramEndSec = (seismogram.endTime.valueOf() - domainStart) / 1000;
       let startSamplesToTrim = 0;
       let endSamplesToTrim = 0;
 
       if (seismogramStartSec < 0) {
         startSamplesToTrim = Math.ceil(-seismogramStartSec * dataSampleRate);
-        seismogramStartSec = 0;
       }
       if (seismogramEndSec > durationSec) {
         endSamplesToTrim = Math.ceil((seismogramEndSec - durationSec) * dataSampleRate);
-        seismogramEndSec = durationSec;
       }
 
-      spectrogram.setData(fullSeisData.slice(startSamplesToTrim, fullSeisData.length - endSamplesToTrim));
+      const visibleData = fullSeisData.slice(startSamplesToTrim, fullSeisData.length - endSamplesToTrim);
+      const visibleDurationSec = visibleData.length / dataSampleRate;
 
-      spectrogram.render(
-        canvas,
-        [seismogramStartSec, seismogramEndSec],
-      ).catch((err) => {
+      spectrogram.setData(visibleData);
+
+      spectrogram.render(canvas, [0, visibleDurationSec]).catch((err) => {
         util.warn(`Error rendering spectrogram: ${err.message}`);
         return;
       });
