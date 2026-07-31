@@ -56,37 +56,49 @@ export class Spectrogram extends Seismograph {
       return;
     clearCanvas(canvas);
 
-    let dataSampleRate;
     this._seisDataList.forEach((sdd) => {
+      // Get the time range for the view of the spectrogram and validate
       const xScale = this.timeScaleForSeisDisplayData(sdd, true);
-      // const yScale = this.ampScaleForSeisDisplayData(sdd);
       const domainStart = xScale.domain().start?.valueOf();
       const domainEnd = xScale.domain().end?.valueOf();
       if (domainStart == null || domainEnd == null || domainStart === domainEnd) {
         return;
       }
 
+      // Get seismogram and sampleRate, and validate
       const seismogram = sdd.seismogram;
-      if (!seismogram) {
+      if (!seismogram)
         return;
-      }
-
-      dataSampleRate = seismogram.sampleRate;
-
+      const dataSampleRate = seismogram.sampleRate;
       if (dataSampleRate == null)
         return;
 
+      // Get the full seismogram data and calculate how much to trim
       const fullSeisData = new Float32Array(seismogram.y);
-      const durationSec = fullSeisData.length / dataSampleRate;
-      const startTime = seismogram.startTime.valueOf() / 1000;
+      let seismogramStartSec = seismogram.startTime.valueOf() / 1000;
+      const seismogramEndSec = seismogram.endTime.valueOf() / 1000;
+      let startSamplesToTrim = 0;
+      let endSamplesToTrim = 0;
 
-      // TODO: In order to optimize rendering, the canvas renderer should be initialized in the constructor somehow so that we can
-      // use the canvas renderer's cache appropriately
+      if (seismogramStartSec < domainStart) {
+        startSamplesToTrim = Math.ceil((domainStart - seismogramStartSec) * dataSampleRate);
+        seismogramStartSec = domainStart;
+      }
+      if (seismogramEndSec > domainEnd) {
+        endSamplesToTrim = Math.ceil((seismogramEndSec - domainEnd) * dataSampleRate);
+      }
+
+      // Initialize the spectrogram model with our trimmed start time
       const spectrogram = new SpectrogramModel(
         this.spectrogramConfig,
         dataSampleRate,
-        startTime,
+        seismogramStartSec,
       );
+      const visibleData = fullSeisData.slice(startSamplesToTrim, fullSeisData.length - endSamplesToTrim);
+      spectrogram.setData(visibleData);
+
+      // TODO: In order to optimize rendering, the canvas renderer should be initialized in the constructor somehow so that we can
+      // use the canvas renderer's cache appropriately
       // TODO: Do we use durationSec here instead of canvasWidth? durationSec seems to give a much more accurate representation
       // of the time window, although it slows down the rendering quite a bit. Wait, does it mean the window size of the fft?
       const canvasRenderer = new CanvasRenderer(
@@ -94,21 +106,7 @@ export class Spectrogram extends Seismograph {
         canvas.width,  // this.spectrogramConfig.fftSize?
       );
 
-      const seismogramStartSec = (seismogram.startTime.valueOf() - domainStart) / 1000;
-      const seismogramEndSec = (seismogram.endTime.valueOf() - domainStart) / 1000;
-      let startSamplesToTrim = 0;
-      let endSamplesToTrim = 0;
-
-      if (seismogramStartSec < 0) {
-        startSamplesToTrim = Math.ceil(-seismogramStartSec * dataSampleRate);
-      }
-      if (seismogramEndSec > durationSec) {
-        endSamplesToTrim = Math.ceil((seismogramEndSec - durationSec) * dataSampleRate);
-      }
-
-      const visibleData = fullSeisData.slice(startSamplesToTrim, fullSeisData.length - endSamplesToTrim);
-      spectrogram.setData(visibleData);
-      canvasRenderer.render(canvas).catch((err) => {
+      canvasRenderer.render(canvas, domainStart, domainEnd).catch((err) => {
         util.warn(`Error rendering spectrogram: ${err.message}`);
         return;
       });
@@ -116,11 +114,6 @@ export class Spectrogram extends Seismograph {
   }
 }
 customElements.define(SPECTROGRAM_ELEMENT, Spectrogram);
-
-export interface RenderOptions {
-  canvas: HTMLCanvasElement;
-  timeRange: [number, number]; // [startTime, endTime]
-}
 
 class SpectrogramModel {
   config: SpectrogramConfig;
@@ -138,12 +131,7 @@ class SpectrogramModel {
   }
 
   setData(data: Float32Array) {
-    // Taken from branch where isTimestamped is false because we don't do that here
     this.data = data;
-  }
-
-  updateConfig(newConfig: Partial<SpectrogramConfig>) {
-    Object.assign(this.config, newConfig);
   }
 }
 
@@ -152,8 +140,7 @@ class CanvasRenderer {
   private processor: ChunkProcessor;
   private canvasSize: number;
 
-  private chunks: Map<string, DataChunk> = new Map();
-  private offscreenHelpers: Map<string, ImageBitmap> = new Map();
+  private chunksCache: Map<string, DataChunk> = new Map();
 
   constructor(model: SpectrogramModel, canvasSize: number) {
     this.model = model;
@@ -165,24 +152,21 @@ class CanvasRenderer {
     );
   }
 
+  // TODO: Where can we expose this or use it for efficiency?
   clearCache() {
-    this.chunks.clear();
-    this.offscreenHelpers.clear();
-  }
-
-  dispose() {
-    this.clearCache();
+    this.chunksCache.clear();
   }
 
   /**
    * Renders the SpectrogramModel on the given canvas at the specified time and frequency ranges
    * @param canvas The canvas element on which to render the spectrogram
-   * @param viewTimeRange The time range to display in seconds from epoch
+   * @param viewStartTime The start time of the view range in seconds from epoch
+   * @param viewEndTime The end time of the view range in seconds from epoch
    * @returns A promise resolving when rendering is complete
    */
-  async render(canvas: HTMLCanvasElement, viewTimeRange: [number, number]) {
+  async render(canvas: HTMLCanvasElement, viewStartTime: number, viewEndTime: number) {
     const ctx = canvas.getContext("2d", { alpha: true })!;
-    if (!ctx || !this.model.data || viewTimeRange[0] >= viewTimeRange[1]) {
+    if (!ctx || !this.model.data || viewStartTime >= viewEndTime) {
       return;
     }
 
@@ -208,8 +192,8 @@ class CanvasRenderer {
     const chunkSamples = hopsPerChunk * hopSize;
 
     // Calculates where the data starts and ends relative to the start of the view range
-    const dataRelStartIdx = (dataStartTime - viewTimeRange[0]) * sampleRate;
-    const dataRelEndIdx = (dataEndTime - viewTimeRange[0]) * sampleRate;
+    const dataRelStartIdx = (dataStartTime - viewStartTime) * sampleRate;
+    const dataRelEndIdx = (dataEndTime - viewStartTime) * sampleRate;
 
     // Only render the chunks that have data
     const startChunkId = Math.floor(dataRelStartIdx / chunkSamples);
@@ -228,7 +212,7 @@ class CanvasRenderer {
         chunkId = `chunk_${chunkStart}_${chunkEnd}`;
       }
 
-      let chunk = this.chunks.get(chunkId);
+      let chunk = this.chunksCache.get(chunkId);
       if (!chunk) {
         const newChunk = new DataChunk(
           chunkId,
@@ -236,7 +220,7 @@ class CanvasRenderer {
           chunkEnd,
           sampleRate,
         );
-        this.chunks.set(chunkId, newChunk);
+        this.chunksCache.set(chunkId, newChunk);
 
         // Convert the processed data to an image
         const imgData = this.processor.process(
