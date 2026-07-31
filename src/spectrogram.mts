@@ -323,8 +323,6 @@ export class CanvasRenderer {
           tEnd,
           fMin,
           fMax,
-          0,
-          0,
           width,
           height,
         );
@@ -334,15 +332,24 @@ export class CanvasRenderer {
     }
   }
 
+  /**
+   * Draws a chunk of spectrogram within the view range
+   * @param ctx 2D rendering context to draw on
+   * @param chunk DataChunk instance to draw
+   * @param viewStartTime Start time of the view range in seconds
+   * @param viewEndTime End time of the view range in seconds
+   * @param fMin Minimum frequency to display
+   * @param fMax Maximum frequency to display
+   * @param plotW Width of the plot area
+   * @param plotH Height of the plot area
+   */
   private drawChunk(
     ctx: CanvasRenderingContext2D,
     chunk: DataChunk,
-    viewTStart: number,
-    viewTEnd: number,
+    viewStartTime: number,
+    viewEndTime: number,
     fMin: number, // Hz
     fMax: number, // Hz
-    plotX: number,
-    plotY: number,
     plotW: number,
     plotH: number,
   ) {
@@ -350,40 +357,52 @@ export class CanvasRenderer {
       return;
     }
 
-    const viewDuration = viewTEnd - viewTStart;
+    const viewDuration = viewEndTime - viewStartTime;
     const sampleRate = this.model.sampleRate;
     const nyquist = sampleRate / 2;
 
     const chunkStartTime = chunk.startIndex / sampleRate;
     const chunkEndTime = chunk.endIndex / sampleRate;
 
-    const x1 = plotX + ((chunkStartTime - viewTStart) / viewDuration) * plotW;
-    const x2 = plotX + ((chunkEndTime - viewTStart) / viewDuration) * plotW;
+    // Calculate the x-coordinates for the chunk within the plot area
+    const x1 = ((chunkStartTime - viewStartTime) / viewDuration) * plotW;
+    const x2 = ((chunkEndTime - viewStartTime) / viewDuration) * plotW;
 
-    if (x2 <= plotX || x1 >= plotX + plotW) {
+    if (x2 <= 0 || x1 >= plotW) {
       return;
     }
 
-    const dx = Math.max(plotX, x1);
-    const dw = Math.min(plotX + plotW, x2) - dx;
+    // Constrain the x-coordinates to the plot area
+    const chunkX = Math.max(0, x1);
+    const chunkW = Math.min(plotW, x2) - chunkX;
 
+    // If the x-coordinates don't fill the entire chunk area, draw only the portion that does
     const texW = chunk.image.width;
-    const sx = ((dx - x1) / (x2 - x1)) * texW;
-    const sw = (dw / (x2 - x1)) * texW;
+    const drawStartX = ((chunkX - x1) / (x2 - x1)) * texW;
+    const drawWidth = (chunkW / (x2 - x1)) * texW;
 
+    // Constrain the y-coordinates to be within the safe frequency range
     const safeFMax = Math.min(fMax, nyquist);
     const safeFMin = Math.max(fMin, 0);
 
+    // If the y-coordinates don't fill the entire frequency range, draw only the portion that does
     const texH = chunk.image.height;
-    const sy_top = (1 - safeFMax / nyquist) * texH;
-    const sy_bottom = (1 - safeFMin / nyquist) * texH;
-    const sy_h = sy_bottom - sy_top;
+    const drawStartY = (1 - safeFMax / nyquist) * texH;
+    const drawEndY = (1 - safeFMin / nyquist) * texH;
+    const drawHeight = drawEndY - drawStartY;
 
-    if (sy_h > 0) {
-      const dy = plotY;
-      const dh = plotH;
-
-      ctx.drawImage(chunk.image, sx, sy_top, sw, sy_h, dx, dy, dw, dh);
+    if (drawHeight > 0) {
+      ctx.drawImage(
+        chunk.image,
+        drawStartX,
+        drawStartY,
+        drawWidth,
+        drawHeight,
+        chunkX,
+        0,
+        chunkW,
+        plotH
+      );
     }
   }
 }
