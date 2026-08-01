@@ -74,18 +74,20 @@ export class Spectrogram extends Seismograph {
         return;
 
       // Get the full seismogram data and calculate how much to trim
+      const viewStartTime = domainStart / 1000;
+      const viewEndTime = domainEnd / 1000;
       const fullSeisData = new Float32Array(seismogram.y);
       let seismogramStartSec = seismogram.startTime.valueOf() / 1000;
       const seismogramEndSec = seismogram.endTime.valueOf() / 1000;
       let startSamplesToTrim = 0;
       let endSamplesToTrim = 0;
 
-      if (seismogramStartSec < domainStart) {
-        startSamplesToTrim = Math.ceil((domainStart - seismogramStartSec) * dataSampleRate);
-        seismogramStartSec = domainStart;
+      if (seismogramStartSec < viewStartTime) {
+        startSamplesToTrim = Math.ceil((viewStartTime - seismogramStartSec) * dataSampleRate);
+        seismogramStartSec = viewStartTime;
       }
-      if (seismogramEndSec > domainEnd) {
-        endSamplesToTrim = Math.ceil((seismogramEndSec - domainEnd) * dataSampleRate);
+      if (seismogramEndSec > viewEndTime) {
+        endSamplesToTrim = Math.ceil((seismogramEndSec - viewEndTime) * dataSampleRate);
       }
 
       // Initialize the spectrogram model with our trimmed start time
@@ -106,7 +108,7 @@ export class Spectrogram extends Seismograph {
         canvas.width,  // this.spectrogramConfig.fftSize?
       );
 
-      canvasRenderer.render(canvas, domainStart, domainEnd).catch((err) => {
+      canvasRenderer.render(canvas, viewStartTime, viewEndTime).catch((err) => {
         util.warn(`Error rendering spectrogram: ${err.message}`);
         return;
       });
@@ -166,7 +168,7 @@ class CanvasRenderer {
    */
   async render(canvas: HTMLCanvasElement, viewStartTime: number, viewEndTime: number) {
     const ctx = canvas.getContext("2d", { alpha: true })!;
-    if (!ctx || !this.model.data || viewStartTime >= viewEndTime) {
+    if (!ctx || !this.model.data || !this.model.data.length || viewStartTime >= viewEndTime) {
       return;
     }
 
@@ -206,7 +208,7 @@ class CanvasRenderer {
 
       // If the chunk is only partially filled with data, it is a special chunk and should not be stored in
       // the cache in the same way as a regular chunk
-      if (chunkStart < dataRelEndIdx || chunkEnd > dataRelEndIdx) {
+      if (chunkStart < dataRelStartIdx || chunkEnd > dataRelEndIdx) {
         chunkStart = Math.max(chunkStart, dataRelStartIdx);
         chunkEnd = Math.min(chunkEnd, dataRelEndIdx);
         chunkId = `chunk_${chunkStart}_${chunkEnd}`;
@@ -291,8 +293,8 @@ class CanvasRenderer {
 
     // Calculate the x-coordinates for the chunk within the plot area
     const plotW = ctx.canvas.width;
-    const x1 = ((chunkStartTime - viewStartTime) / viewDuration) * plotW;
-    const x2 = ((chunkEndTime - viewStartTime) / viewDuration) * plotW;
+    const x1 = (chunkStartTime / viewDuration) * plotW;
+    const x2 = (chunkEndTime / viewDuration) * plotW;
 
     if (x2 <= 0 || x1 >= plotW) {
       return;
