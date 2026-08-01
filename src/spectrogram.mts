@@ -77,18 +77,7 @@ export class Spectrogram extends Seismograph {
       const viewStartTime = domainStart / 1000;
       const viewEndTime = domainEnd / 1000;
       const fullSeisData = new Float32Array(seismogram.y);
-      let seismogramStartSec = seismogram.startTime.valueOf() / 1000;
-      const seismogramEndSec = seismogram.endTime.valueOf() / 1000;
-      let startSamplesToTrim = 0;
-      let endSamplesToTrim = 0;
-
-      if (seismogramStartSec < viewStartTime) {
-        startSamplesToTrim = Math.ceil((viewStartTime - seismogramStartSec) * dataSampleRate);
-        seismogramStartSec = viewStartTime;
-      }
-      if (seismogramEndSec > viewEndTime) {
-        endSamplesToTrim = Math.ceil((seismogramEndSec - viewEndTime) * dataSampleRate);
-      }
+      const seismogramStartSec = seismogram.startTime.valueOf() / 1000;
 
       // Initialize the spectrogram model with our trimmed start time
       const spectrogram = new SpectrogramModel(
@@ -96,8 +85,7 @@ export class Spectrogram extends Seismograph {
         dataSampleRate,
         seismogramStartSec,
       );
-      const visibleData = fullSeisData.slice(startSamplesToTrim, fullSeisData.length - endSamplesToTrim);
-      spectrogram.setData(visibleData);
+      spectrogram.setData(fullSeisData);
 
       // TODO: In order to optimize rendering, the canvas renderer should be initialized in the constructor somehow so that we can
       // use the canvas renderer's cache appropriately
@@ -193,13 +181,18 @@ class CanvasRenderer {
     const hopsPerChunk = Math.ceil(targetSamples / hopSize);
     const chunkSamples = hopsPerChunk * hopSize;
 
-    // Calculates where the data starts and ends relative to the start of the view range
-    const dataRelStartIdx = (dataStartTime - viewStartTime) * sampleRate;
-    const dataRelEndIdx = (dataEndTime - viewStartTime) * sampleRate;
+    // Calculates where the data starts and ends relative to the start of the view range while
+    // respecting the view boundaries
+    const overlapStartAbs = Math.max(viewStartTime, dataStartTime);
+    const overlapEndAbs = Math.min(viewEndTime, dataEndTime);
+    if (overlapEndAbs <= overlapStartAbs)
+      return;
+    const dataRelStartIdx = Math.floor((overlapStartAbs - dataStartTime) * sampleRate);
+    const dataRelEndIdx = Math.ceil((overlapEndAbs - dataStartTime) * sampleRate);
 
     // Only render the chunks that have data
     const startChunkId = Math.floor(dataRelStartIdx / chunkSamples);
-    const endChunkId = Math.floor(dataRelEndIdx / chunkSamples);
+    const endChunkId = Math.floor((dataRelEndIdx - 1) / chunkSamples);
 
     for (let i = startChunkId; i <= endChunkId; i++) {
       let chunkStart = i * chunkSamples;
@@ -250,8 +243,8 @@ class CanvasRenderer {
         this.drawChunk(
           ctx,
           chunk,
-          dataStartTime,
-          dataEndTime,
+          viewStartTime,
+          viewEndTime,
           fMin,
           fMax
         );
@@ -288,17 +281,16 @@ class CanvasRenderer {
     const sampleRate = this.model.sampleRate;
     const nyquist = sampleRate / 2;
 
-    const chunkStartTime = chunk.startIndex / sampleRate;
-    const chunkEndTime = chunk.endIndex / sampleRate;
+    const chunkStartTime = this.model.startTime + chunk.startIndex / sampleRate;
+    const chunkEndTime = this.model.startTime + chunk.endIndex / sampleRate;
 
     // Calculate the x-coordinates for the chunk within the plot area
     const plotW = ctx.canvas.width;
-    const x1 = (chunkStartTime / viewDuration) * plotW;
-    const x2 = (chunkEndTime / viewDuration) * plotW;
+    const x1 = ((chunkStartTime - viewStartTime) / viewDuration) * plotW;
+    const x2 = ((chunkEndTime - viewStartTime) / viewDuration) * plotW;
 
-    if (x2 <= 0 || x1 >= plotW) {
+    if (x2 <= 0 || x1 >= plotW)
       return;
-    }
 
     // Constrain the x-coordinates to the plot area
     const chunkX = Math.max(0, x1);
