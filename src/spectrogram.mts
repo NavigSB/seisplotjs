@@ -14,10 +14,12 @@ export type WindowFunctionType =
 const SPECTROGRAM_ELEMENT = "sp-spectrogram";
 
 export class SpectrogramConfig extends SeismographConfig {
-  // Number of time samples in each FFT frame
-  fftSize: number = 2048;
+  // The number of points used to compute the FFT, determining the number of frequency bins in the spectrogram
+  fftSize: number = 512;
+  // The number of samples extracted for each distinct time frame. Must be <= fftSize
+  windowSize: number = 512;
   // How much to overlap each FFT frame (as a fraction of the window size)
-  overlapPerc: number = 0.95;
+  overlapPerc: number = 0.5;
   // Minimum time window for each spectrogram slice in seconds - ideally, resulting chunk times will be near this value
   minChunkTime: number = 10;
   // Type of window function to apply
@@ -89,11 +91,9 @@ export class Spectrogram extends Seismograph {
 
       // TODO: In order to optimize rendering, the canvas renderer should be initialized in the constructor somehow so that we can
       // use the canvas renderer's cache appropriately
-      // TODO: Do we use durationSec here instead of canvasWidth? durationSec seems to give a much more accurate representation
-      // of the time window, although it slows down the rendering quite a bit. Wait, does it mean the window size of the fft?
       const canvasRenderer = new CanvasRenderer(
         spectrogram,
-        canvas.width,  // this.spectrogramConfig.fftSize?
+        this.spectrogramConfig.windowSize,
       );
 
       canvasRenderer.render(canvas, viewStartTime, viewEndTime).catch((err) => {
@@ -128,17 +128,17 @@ class SpectrogramModel {
 class CanvasRenderer {
   private model: SpectrogramModel;
   private processor: ChunkProcessor;
-  private canvasSize: number;
+  private windowSize: number;
 
   private chunksCache: Map<string, DataChunk> = new Map();
 
   constructor(model: SpectrogramModel, canvasSize: number) {
     this.model = model;
-    this.canvasSize = canvasSize;
+    this.windowSize = canvasSize;
     this.processor = new ChunkProcessor(
       this.model.config,
       this.model.sampleRate,
-      canvasSize,
+      this.windowSize,
     );
   }
 
@@ -172,8 +172,8 @@ class CanvasRenderer {
 
     // Calculates how big each chunk should be according to the desired time range and overlap
     const sampleRate = this.model.sampleRate;
-    const overlap = Math.floor(this.model.config.overlapPerc * this.canvasSize);
-    const hopSize = Math.max(1, this.canvasSize - overlap);
+    const overlap = Math.floor(this.model.config.overlapPerc * this.windowSize);
+    const hopSize = Math.max(1, this.windowSize - overlap);
 
     // Calculates the number of samples to include in each chunk based on the desired minimum chunk
     // time. A minimum chunk time is often used for performance reasons
