@@ -2,9 +2,15 @@ import { DateTime } from "luxon";
 import { SeismogramDisplayData } from "./seismogram.mjs";
 import { Seismograph } from "./seismograph.mjs";
 import { fftForward } from "./fft.mjs";
-import { SeismographConfig } from "./seismographconfig.mjs";
+import { SeismographConfig, numberFormatWrapper } from "./seismographconfig.mjs";
 import { clearCanvas } from "./seismographutil.mjs";
 import { util } from "./index_node.mjs";
+import type { Axis } from "d3-axis";
+import type { NumberValue as d3NumberValue } from "d3-scale";
+import {
+  axisLeft as d3axisLeft,
+  axisRight as d3axisRight,
+} from "d3-axis";
 
 export type WindowFunctionType =
   | "hann"
@@ -27,6 +33,7 @@ export class SpectrogramConfig extends SeismographConfig {
   // Frequency range for the spectrogram display in Hz - cannot exceed Nyquist frequency (sampleRate / 2)
   freqMin: number = 0;
   freqMax: number = 15;
+  frequencyFormat: (val: number) => string = (val) => val.toFixed(1);
   // Lower and upper bounds for spectrogram color scaling in decibels.
   // FFT power values below minDb are shown as the darkest color,
   // and values above maxDb are shown as the brightest color.
@@ -37,6 +44,8 @@ export class SpectrogramConfig extends SeismographConfig {
 
   constructor() {
     super();
+    // Set new defaults for SeismographConfig fields
+    this.yLabel = "Frequency";
   }
 }
 
@@ -101,6 +110,34 @@ export class Spectrogram extends Seismograph {
         return;
       });
     });
+  }
+
+  override createLeftRightAxis(): Array<Axis<d3NumberValue> | null> {
+    let yAxis = null;
+    let yAxisRight = null;
+    const axisScale = this.__initAmpScale()
+      .domain([this.spectrogramConfig.freqMin, this.spectrogramConfig.freqMax]);
+    if (this.spectrogramConfig.isYAxis) {
+      yAxis = d3axisLeft(axisScale).tickFormat(
+        numberFormatWrapper(this.spectrogramConfig.frequencyFormat),
+      );
+      yAxis.scale(axisScale);
+      yAxis.ticks(this.spectrogramConfig.yAxisNumTickHint,
+        this.spectrogramConfig.frequencyFormat);
+    }
+
+    if (this.spectrogramConfig.isYAxisRight) {
+      yAxisRight = d3axisRight(axisScale).tickFormat(
+        numberFormatWrapper(this.spectrogramConfig.frequencyFormat),
+      );
+      yAxisRight.scale(axisScale);
+      yAxisRight.ticks(this.spectrogramConfig.yAxisNumTickHint, this.spectrogramConfig.frequencyFormat);
+    }
+    return [yAxis, yAxisRight];
+  }
+
+  override createUnitsLabel() {
+    return "Hz";
   }
 }
 customElements.define(SPECTROGRAM_ELEMENT, Spectrogram);
