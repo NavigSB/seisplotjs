@@ -42,7 +42,7 @@
     "src/*.mts"
   ],
   "dependencies": {
-    "convert-units": "^3.0.0-beta.6",
+    "convert-units": "^3.0.0-beta.8",
     "crc-32": "^1.2.2",
     "d3-array": "^3.2.4",
     "d3-axis": "^3.0.0",
