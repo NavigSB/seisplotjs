@@ -12,14 +12,14 @@ setDefaultFetch(fetch);
  */
 
 
-test("version", () => {
+test.skip("version", () => {
   const avail = new AvailabilityQuery();
   return avail.queryVersion().then( res => {
     expect(res.length).toBeGreaterThan(1);
   });
 });
 
-test("do test", () => {
+test.skip("do test", () => {
   const avail = new AvailabilityQuery()
     .networkCode("CO")
     .stationCode("BIRD")

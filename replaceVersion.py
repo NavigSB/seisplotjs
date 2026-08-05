@@ -8,7 +8,7 @@ with Path("package.json").open() as infile:
     npmPackage = json.load(infile)
 
 
-old="3.2.6"
+old="3.2.7"
 ver=npmPackage["version"]
 print(f"Update {old} to {ver}")
 
@@ -45,7 +45,7 @@ stuffToChange = ['docs/tutorial/*.html', 'docs/tutorial/*.js',
                  'docs/examples', 'docs/index.html',
                  'docs/gallery/*.html','docs/api/*.html',
                  'src', 'test', 'testremotes', 'createApiDocs.sh'
-                 'VERSION', 'replaceVersion.py']
+                 'VERSION', 'build_hints.md', 'replaceVersion.py']
 for stuff in stuffToChange:
     for toppath in Path('.').glob(stuff):
         if toppath.is_dir():

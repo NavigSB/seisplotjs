@@ -6,6 +6,7 @@ npm run compile
 
 # Test
 npm test
+npm run testremotes
 
 #before publish:
 update version in package.json
@@ -16,3 +17,13 @@ npm run prepublishOnly
 
 npm login
 npm publish
+
+# tag, and github
+git tag -a -m 'v3.2.7' v3.2.7
+git push
+# create release on github for tag and add standalone as binary
+
+git switch main
+git merge dev
+
+# zenodo, draft new release

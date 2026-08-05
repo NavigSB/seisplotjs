@@ -101,6 +101,8 @@ export function createParticleMotionConfig(
   return seisConfig;
 }
 
+export const PARTICLE_MOTION_CSS_ID = "particlemotioncss";
+
 /**
  * Particle motion plot.
  *
@@ -155,7 +157,7 @@ export class ParticleMotion extends SeisPlotElement {
     this._xSeisData = xSeisData;
     this._ySeisData = ySeisData;
 
-    this.addStyle(particleMotion_css);
+    this.addStyle(particleMotion_css, PARTICLE_MOTION_CSS_ID);
     const lineColorsCSS = this.seismographConfig.createCSSForLineColors();
     this.addStyle(lineColorsCSS, COLOR_CSS_ID);
 

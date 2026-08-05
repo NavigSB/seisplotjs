@@ -208,6 +208,7 @@ svg.seismograph text a {
 `;
 
 export const COLOR_CSS_ID = "seismographcolors";
+export const SEISMOGRAPH_CSS_ID = "seismographcss";
 
 /* A seismogram plot, using d3. The actual waveform can be drawn
  * with a separate Canvas (default) or with SVG.
@@ -268,7 +269,7 @@ export class Seismograph extends SeisPlotElement {
 
     const wrapper = document.createElement("div");
     wrapper.setAttribute("class", "wrapper");
-    this.addStyle(seismograph_css);
+    this.addStyle(seismograph_css, SEISMOGRAPH_CSS_ID);
     const lineColorsCSS = this.seismographConfig.createCSSForLineColors();
     this.addStyle(lineColorsCSS, COLOR_CSS_ID);
     this.getShadowRoot().appendChild(wrapper);

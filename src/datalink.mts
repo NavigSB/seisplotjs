@@ -161,13 +161,13 @@ export class DataLinkConnection {
    */
   connect(): Promise<string> {
     if (this.webSocket) {
+      this.webSocket.onclose = (closeEvent) => {
+        //ignore closeEvent from previous websocket on reconnect
+        };
       this.webSocket.close();
       this.webSocket = null;
     }
     return new Promise((resolve, reject) => {
-      if (this.webSocket) {
-        this.webSocket.close();
-      }
       const webSocket = new WebSocket(this.url, this.subprotocol);
       this.webSocket = webSocket;
       webSocket.binaryType = "arraybuffer";
@@ -198,7 +198,8 @@ export class DataLinkConnection {
     }).then((datalink: unknown) => {
         return (datalink as DataLinkConnection).sendId();
     }).catch( e => {
-      if (!this.webSocket?.protocol || this.webSocket.protocol.length === 0) {
+      console.error(e);
+      if (this.webSocket && (!this.webSocket?.protocol || this.webSocket.protocol.length === 0)) {
         throw new Error(`fail to create websocket, possible due to subprotocol: sent subprotocol=${this.subprotocol} received empty`);
       }
       throw e;
@@ -364,7 +365,7 @@ export class DataLinkConnection {
   sendDLBinary(header: string, data?: Uint8Array): void {
     const rawPacket = this.encodeDL(header, data);
 
-    if (this.webSocket) {
+    if (this.webSocket!=null) {
       this.webSocket.send(rawPacket);
     } else {
       throw new Error("WebSocket has been closed.");
