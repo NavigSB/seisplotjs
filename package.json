@@ -80,7 +80,7 @@
     "doc": "npm run standalone && npm run apidoc && npm run tutorial_snippet ",
     "apidoc": "npm run apidoc:clean && ./createApiDocs.sh",
     "prepare": "npm run compile ",
-    "version": "npm run compile && npm run bumpversion && npm run doc",
+    "version": "npm run compile && npm run bumpversion && npm install && npm run doc",
     "version_to_src": "genversion --semi --es6 src/version.mts",
     "postversion": "echo remember: git push && echo remember: git push --tags",
     "bumpversion": "python3 replaceVersion.py && echo ${npm_package_version} > VERSION",
