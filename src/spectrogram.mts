@@ -71,6 +71,7 @@ export class Spectrogram extends Seismograph {
     if (!canvas)
       return;
     clearCanvas(canvas);
+    this.canvasRenderer.setCanvas(canvas);
 
     this._seisDataList.forEach((sdd) => {
       // Get the time range for the view of the spectrogram and validate
@@ -135,7 +136,16 @@ export class Spectrogram extends Seismograph {
   }
 
   override createUnitsLabel() {
-    return "Hz";
+    if (this.spectrogramConfig.ySublabelIsUnits) {
+      return "Hz";
+    }
+    return "";
+  }
+
+  override seisDataUpdated() {
+    // Invalidate the cache when the data is updated, so that new chunks will be generated for the new data
+    this.canvasRenderer.clearCache();
+    super.seisDataUpdated();
   }
 }
 customElements.define(SPECTROGRAM_ELEMENT, Spectrogram);
@@ -172,9 +182,12 @@ class CanvasRenderer {
     this.windowSize = canvasSize;
   }
 
-  // TODO: Where can we expose this or use it for efficiency?
   clearCache() {
     this.chunksCache.clear();
+  }
+
+  setCanvas(canvas: HTMLCanvasElement) {
+    this.canvas = canvas;
   }
 
   /**
