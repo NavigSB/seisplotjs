@@ -21,11 +21,11 @@ const SPECTROGRAM_ELEMENT = "sp-spectrogram";
 
 export class SpectrogramConfig extends SeismographConfig {
   // The number of points used to compute the FFT, determining the number of frequency bins in the spectrogram
-  fftSize: number = 512;
+  fftSize: number = 256;
   // The number of samples extracted for each distinct time frame. Must be <= fftSize
-  windowSize: number = 512;
+  windowSize: number = 256;
   // How much to overlap each FFT frame (as a fraction of the window size)
-  overlapPerc: number = 0.5;
+  overlapPerc: number = 0.86;
   // Minimum time window for each spectrogram slice in seconds - ideally, resulting chunk times will be near this value
   minChunkTime: number = 10;
   // Type of window function to apply
