@@ -83,12 +83,14 @@ export class Spectrogram extends Seismograph {
       // no need to draw if we are not visible
       return;
     }
+    // Clear the canvas before drawing, making sure the canvasRenderer is set to the current canvas
     const canvas = this.canvas?.node();
     if (!canvas)
       return;
     clearCanvas(canvas);
     this.canvasRenderer.setCanvas(canvas);
 
+    // Draw a separate SpectrogramModel for each SeismogramDisplayData in the list to adjust for different sample rates and start times
     this._seisDataList.forEach((sdd) => {
       // Get the time range for the view of the spectrogram and validate
       const xScale = this.timeScaleForSeisDisplayData(sdd, true);
@@ -106,13 +108,13 @@ export class Spectrogram extends Seismograph {
       if (dataSampleRate == null)
         return;
 
-      // Get the full seismogram data and calculate how much to trim
+      // Convert the domain start and end times to seconds from epoch, and get the full seismogram data and start time in seconds
       const viewStartTime = domainStart / 1000;
       const viewEndTime = domainEnd / 1000;
       const fullSeisData = new Float32Array(seismogram.y);
       const seismogramStartSec = seismogram.startTime.valueOf() / 1000;
 
-      // Initialize the spectrogram model with our trimmed start time
+      // Initialize the spectrogram model for this particular seismogram and set the data
       const spectrogram = new SpectrogramModel(
         this.spectrogramConfig,
         dataSampleRate,
@@ -120,6 +122,8 @@ export class Spectrogram extends Seismograph {
       );
       spectrogram.setData(fullSeisData);
 
+      // Render the spectrogram to the canvas, using our calculated view start and end times to calculate where each chunk should be
+      // drawn. We use catch because the rendering is async and we don't want to block the main thread if an error occurs
       this.canvasRenderer.render(spectrogram, viewStartTime, viewEndTime).catch((err) => {
         util.warn(`Error rendering spectrogram: ${err.message}`);
         return;
