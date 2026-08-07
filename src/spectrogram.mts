@@ -17,6 +17,20 @@ export type WindowFunctionType =
   | "hamming"
   | "blackman"
   | "rectangular";
+export type ColorMapName =
+  | "viridis"
+  | "inferno"
+  | "grayscale"
+  | "jet"
+  | "hot"
+  | "cool"
+  | "spring"
+  | "summer"
+  | "autumn"
+  | "winter"
+  | "bone";
+export type RGB = [number, number, number];
+
 const SPECTROGRAM_ELEMENT = "sp-spectrogram";
 
 export class SpectrogramConfig extends SeismographConfig {
@@ -24,19 +38,21 @@ export class SpectrogramConfig extends SeismographConfig {
   fftSize: number = 256;
   // The number of samples extracted for each distinct time frame. Must be <= fftSize
   windowSize: number = 256;
-  // How much to overlap each FFT frame (as a fraction of the window size)
+  // How much to overlap each FFT frame (as a fraction of the windowSize). A higher overlap results in smoother spectrograms, but
+  // increases computation time
   overlapPerc: number = 0.86;
-  // Minimum time window for each spectrogram slice in seconds - ideally, resulting chunk times will be near this value
+  // Minimum time window for each spectrogram slice in seconds - ideally, resulting chunk times will be near this value. A higher
+  // value results in bigger chunks and better performance, but may result in a less smooth spectrogram
   minChunkTime: number = 10;
   // Type of window function to apply
   windowType: WindowFunctionType = "hann";
-  // Frequency range for the spectrogram display in Hz - cannot exceed Nyquist frequency (sampleRate / 2)
+  // Frequency range for the spectrogram display in Hz - always constrained to not exceed the Nyquist frequency (sampleRate / 2)
   freqMin: number = 0;
   freqMax: number = 15;
+  // Function to format frequency values for display on the y-axis. Default is to format with 1 decimal place
   frequencyFormat: (val: number) => string = (val) => val.toFixed(1);
-  // Lower and upper bounds for spectrogram color scaling in decibels.
-  // FFT power values below minDb are shown as the darkest color,
-  // and values above maxDb are shown as the brightest color.
+  // Lower and upper bounds for spectrogram color scaling in decibels. FFT power values below minDb are shown as the darkest
+  // color, and values above maxDb are shown as the brightest color.
   minDb: number = 30;
   maxDb: number = 150;
   // Color map for spectrogram display
@@ -114,8 +130,18 @@ export class Spectrogram extends Seismograph {
   override createLeftRightAxis(): Array<Axis<d3NumberValue> | null> {
     let yAxis = null;
     let yAxisRight = null;
+
+    // Constrain the y-coordinates to be within the safe frequency range
+    const sampleRate = this.seisData.reduce(
+      (acc, curr) => Math.min(curr.seismogram?.sampleRate || Infinity, acc),
+      Infinity
+    );
+    const nyquist = sampleRate !== Infinity ? sampleRate / 2 : 0;
+    const safeFMax = Math.min(this.spectrogramConfig.freqMax, nyquist);
+    const safeFMin = Math.max(this.spectrogramConfig.freqMin, 0);
+
     const axisScale = this.__initAmpScale()
-      .domain([this.spectrogramConfig.freqMin, this.spectrogramConfig.freqMax]);
+      .domain([safeFMin, safeFMax]);
     if (this.spectrogramConfig.isYAxis) {
       yAxis = d3axisLeft(axisScale).tickFormat(
         numberFormatWrapper(this.spectrogramConfig.frequencyFormat),
@@ -136,7 +162,7 @@ export class Spectrogram extends Seismograph {
   }
 
   override createUnitsLabel() {
-    if (this.spectrogramConfig.ySublabelIsUnits) {
+    if (this.spectrogramConfig && this.spectrogramConfig.ySublabelIsUnits) {
       return "Hz";
     }
     return "";
@@ -624,21 +650,6 @@ const createWindow = (size: number, type: WindowFunctionType): Float32Array => {
 
   return window;
 };
-
-export type ColorMapName =
-  | "viridis"
-  | "inferno"
-  | "grayscale"
-  | "jet"
-  | "hot"
-  | "cool"
-  | "spring"
-  | "summer"
-  | "autumn"
-  | "winter"
-  | "bone";
-
-export type RGB = [number, number, number];
 
 function interpolateColorMap(t: number, map: number[][]): RGB {
   if (t <= 0) {
