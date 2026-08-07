@@ -12,11 +12,13 @@ import {
   axisRight as d3axisRight,
 } from "d3-axis";
 
+// Types of window functions that can be applied to data chunks before performing the FFT
 export type WindowFunctionType =
   | "hann"
   | "hamming"
   | "blackman"
   | "rectangular";
+// Types of color maps that can be used to display the spectrogram. Each has a function below that maps normalized values to RGB colors
 export type ColorMapName =
   | "viridis"
   | "inferno"
@@ -65,6 +67,7 @@ export class SpectrogramConfig extends SeismographConfig {
   }
 }
 
+// Overriding Seismograph to allow for shared functionality with Seismograph, only altered for the different rendering
 export class Spectrogram extends Seismograph {
   spectrogramConfig: SpectrogramConfig;
   canvasRenderer: CanvasRenderer;
@@ -438,6 +441,7 @@ export class ChunkProcessor {
     windowSize: number,
   ) {
     this.fftSize = config.fftSize;
+    // Used to apply a window function to each data chunk before performing the FFT - helps reduce spectral leakage in the FFT output
     this.windowBuffer = createWindow(windowSize, config.windowType);
     this.inputBuf = new Float32Array(this.fftSize);
     this.sampleRate = sampleRate;
@@ -460,24 +464,30 @@ export class ChunkProcessor {
     config: SpectrogramConfig,
     colormapToRgb: (normalizedVal: number) => [number, number, number],
   ): ImageData {
+    // Calculate the hop size based on the number of unique samples in one window
     const { minDb, maxDb, overlapPerc } = config;
     const windowSize = this.windowBuffer.length;
     const overlap = Math.floor(overlapPerc * windowSize);
     const hopSize = Math.max(1, windowSize - overlap);
 
+    // Divide the data into these hops to get the image width because each hop represents a column in the
+    // spectrogram
     const numHops = Math.ceil((endIdx - startIdx) / hopSize);
     const width = numHops;
+    // The FFT output is symmetric, so we only need to take half of the FFT size for the DC component
     const height = (this.fftSize >> 1) + 1;
 
-    if (width <= 0) {
+    if (width <= 0)
       return new ImageData(1, 1);
-    }
 
     const imgData = new ImageData(width, height);
     const pixels = imgData.data;
     const inputBuf = this.inputBuf;
     const windowBuf = this.windowBuffer;
 
+    // Calculate the sum of the data in the first window for calculating the mean, which will help us remove any
+    // DC offset before performing the FFT. This will be a rolling sum updated per frame to keep the DC average
+    // accurate. This helps to center the data around zero and improves the accuracy of the FFT output
     let dcSum = 0;
     let validCount = 0;
     for (let i = 0; i < windowSize; i++) {
@@ -488,45 +498,61 @@ export class ChunkProcessor {
       }
     }
 
+    // Loop through each hop and perform the FFT on the windowed data, then map the FFT output to RGB colors for the spectrogram
     for (let x = 0; x < width; x++) {
+      // Create the input buffer for the FFT by applying the window function to the data in the current hop, and removing the DC offset
       const signalStart = startIdx + x * hopSize;
       const mean = validCount > 0 ? dcSum / validCount : 0;
-
-      const end = Math.min(windowSize, data.length - signalStart);
       let i = 0;
-      for (; i < end; i++) {
+      const currWindowSize = Math.min(windowSize, data.length - signalStart);
+      for (; i < currWindowSize; i++) {
+        // Check if the index is within the bounds of the data array and the window size
         if (
           signalStart + i < data.length &&
           signalStart + i >= 0 &&
           i >= 0 &&
           i < windowSize
         ) {
+          // If valid, apply the window function and remove the DC offset from the data point
           inputBuf[i] = (data[signalStart + i]! - mean) * windowBuf[i]!;
         }
       }
+      // If the current window size is smaller than the FFT size, fill the remaining input buffer with zeros to smooth the
+      // FFT output. Since the FFT size is often a power of two, this can also speed up computation
       for (; i < this.fftSize; i++) {
         inputBuf[i] = 0;
       }
 
+      // Execute the FFT on the windowed input buffer and get the magnitude spectrum, which will be used to create the spectrogram
       const fft = new FFTExecutor(this.fftSize);
+      // Magnitude spectrum, consisting of magnitude values for each frequency bin. The values are normalized between 0 and 1 based on
+      // the minDb and maxDb configuration settings. These values will be mapped to RGB colors for the spectrogram
       const mags = fft.compute(inputBuf, this.sampleRate, minDb, maxDb);
 
+      // Map the magnitude spectrum to RGB colors for the spectrogram image, and fill in the pixel data for the current column in the image
       for (let y = 0; y < height; y++) {
         if (y < 0 || y >= mags.length) {
           // Index is out of bounds for magnitude array
           break;
         }
-        const val = mags[y];
-        const rgb = colormapToRgb(val!);
+        // Convert the normalized frequency value to an RGB color using the provided colormap function
+        const rgb = colormapToRgb(mags[y]!);
+        // The y-coordinate is inverted because the canvas origin is at the top-left corner, so we need to flip the y-axis to match
+        // the spectrogram orientation
         const row = height - 1 - y;
+        // Convert the 2D pixel coordinates to a 1D index in the ImageData array, which is in RGBA format (4 bytes per pixel)
         const idx = (row * width + x) * 4;
         pixels[idx] = rgb[0];
         pixels[idx + 1] = rgb[1];
         pixels[idx + 2] = rgb[2];
+        // No need for alpha, so set to opaque
         pixels[idx + 3] = 255;
       }
 
+      // Remove the data points that are no longer in the window from the DC sum and add the new data points that are now in the
+      // window to the DC sum. This keeps the DC average accurate for each hop
       if (x + 1 < width) {
+        // Remove the data points that are no longer in the window from the DC sum and valid count
         for (let k = 0; k < hopSize; k++) {
           const outIdx = signalStart + k;
           if (outIdx >= 0 && outIdx < data.length) {
@@ -535,6 +561,7 @@ export class ChunkProcessor {
           }
         }
 
+        // Add the new data points that are now in the window to the DC sum and valid count
         const nextStart = signalStart + windowSize;
         for (let k = 0; k < hopSize; k++) {
           const inIdx = nextStart + k;
