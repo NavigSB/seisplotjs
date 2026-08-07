@@ -131,6 +131,8 @@ export class Spectrogram extends Seismograph {
     });
   }
 
+  // We need to override the normal axis creation to be frequencies instead of amplitudes, and to constrain the frequency
+  // range to the Nyquist frequency
   override createLeftRightAxis(): Array<Axis<d3NumberValue> | null> {
     let yAxis = null;
     let yAxisRight = null;
@@ -143,18 +145,18 @@ export class Spectrogram extends Seismograph {
     const nyquist = sampleRate !== Infinity ? sampleRate / 2 : 0;
     const safeFMax = Math.min(this.spectrogramConfig.freqMax, nyquist);
     const safeFMin = Math.max(this.spectrogramConfig.freqMin, 0);
+    // We can use __initAmpScale because it initializes the scale range to the height of the plot - then we just need to set
+    // the domain to the safe frequency range
+    const axisScale = this.__initAmpScale().domain([safeFMin, safeFMax]);
 
-    const axisScale = this.__initAmpScale()
-      .domain([safeFMin, safeFMax]);
+    // Create the left and right axes just like the normal Seismograph, but with frequency formatting instead of amplitude formatting
     if (this.spectrogramConfig.isYAxis) {
       yAxis = d3axisLeft(axisScale).tickFormat(
         numberFormatWrapper(this.spectrogramConfig.frequencyFormat),
       );
       yAxis.scale(axisScale);
-      yAxis.ticks(this.spectrogramConfig.yAxisNumTickHint,
-        this.spectrogramConfig.frequencyFormat);
+      yAxis.ticks(this.spectrogramConfig.yAxisNumTickHint, this.spectrogramConfig.frequencyFormat);
     }
-
     if (this.spectrogramConfig.isYAxisRight) {
       yAxisRight = d3axisRight(axisScale).tickFormat(
         numberFormatWrapper(this.spectrogramConfig.frequencyFormat),
