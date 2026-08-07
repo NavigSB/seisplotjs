@@ -115,7 +115,7 @@ export class Spectrogram extends Seismograph {
       const seismogramStartSec = seismogram.startTime.valueOf() / 1000;
 
       // Render the spectrogram to the canvas, using our calculated view start and end times to calculate where each chunk should be
-      // drawn. We use catch because the rendering is async and we don't want to block the main thread if an error occurs
+      // drawn. We use catch because the rendering is async and we don't want to block the main thread
       this.canvasRenderer.render(
         fullSeisData,
         this.spectrogramConfig,
@@ -182,11 +182,14 @@ export class Spectrogram extends Seismograph {
 }
 customElements.define(SPECTROGRAM_ELEMENT, Spectrogram);
 
+// Renderer for drawing the spectrogram on a canvas. This class handles the processing of data into spectrogram chunks and
+// managing the caching of processed chunks for performance optimization
 class CanvasRenderer {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D | null = null;
   private windowSize: number;
 
+  // Cache of processed data chunks, keyed by a unique identifier for each chunk. This allows for reusing previously processed chunks
   private chunksCache: Map<string, DataChunk> = new Map();
 
   constructor(canvas: HTMLCanvasElement, canvasSize: number) {
@@ -210,8 +213,8 @@ class CanvasRenderer {
   }
 
   /**
-   * Renders the spectrogram data onto the set canvas according to the provided configuration and view range. This method processes the seismic data in chunks,
-   * applies FFT, and maps the resulting magnitudes to colors based on the specified color map.
+   * Renders the spectrogram data onto the set canvas according to the provided configuration and view range. This method processes the data into chunks
+   * and creates a spectrogram image for each chunk, which is then drawn onto the canvas
    * @param data The seismic data to render as a spectrogram
    * @param config The configuration settings for the spectrogram rendering
    * @param sampleRate The sample rate of the seismic data in Hz
@@ -350,8 +353,8 @@ class CanvasRenderer {
     const viewDuration = viewEndTime - viewStartTime;
     const nyquist = sampleRate / 2;
 
-    const chunkStartTime = startTime + chunk.startIndex / sampleRate;
-    const chunkEndTime = startTime + chunk.endIndex / sampleRate;
+    const chunkStartTime = startTime + chunk.startTime;
+    const chunkEndTime = startTime + chunk.endTime;
 
     // Calculate the x-coordinates for the chunk within the plot area
     const plotW = this.canvas.width;
@@ -396,6 +399,8 @@ class CanvasRenderer {
   }
 }
 
+// Glorified interface for storing information about a chunk of data to be processed into a spectrogram image. This class is used to cache the processed
+// images for performance optimization
 export class DataChunk {
   public id: string;
   public startTime: number;
@@ -415,6 +420,7 @@ export class DataChunk {
     this.id = id;
     this.startIndex = startIdx;
     this.endIndex = endIdx;
+    // Convert the start and end indices to times in seconds from epoch based on the sample rate for convenience when drawing the chunk on the canvas
     this.startTime = startIdx / sampleRate;
     this.endTime = endIdx / sampleRate;
   }
