@@ -653,6 +653,12 @@ class FFTExecutor {
   }
 }
 
+/**
+ * Creates a window function of the specified type and size. Window functions are used to reduce spectral leakage in the FFT by tapering the edges of the data chunk
+ * @param size Size of the window array to be outputted
+ * @param type Type of window function to create. Can be "hann", "hamming", "blackman", or "rectangular"
+ * @returns Float32Array containing the window function values
+ */
 const createWindow = (size: number, type: WindowFunctionType): Float32Array => {
   const window = new Float32Array(size);
 
@@ -685,6 +691,61 @@ const createWindow = (size: number, type: WindowFunctionType): Float32Array => {
   return window;
 };
 
+// ColorMap class for mapping normalized values to RGB colors based on the selected color map type. Generates a
+// lookup table (LUT) for efficient color mapping
+export class ColorMap {
+  private type: ColorMapName;
+  private lut: Uint8Array; // [R, G, B, R, G, B...] for 0..255
+
+  constructor(type: ColorMapName = "jet") {
+    this.type = type;
+    this.lut = new Uint8Array(256 * 3);
+    this.generateLut();
+  }
+
+  /**
+   * Generates a LUT for the selected color map type
+   */
+  private generateLut() {
+    const fn = COLOR_MAP_FNS[this.type];
+    for (let i = 0; i <= 255; i++) {
+      const rgb = fn(i / 255);
+      const j = i * 3;
+      this.lut[j] = rgb[0];
+      this.lut[j + 1] = rgb[1];
+      this.lut[j + 2] = rgb[2];
+    }
+  }
+
+  /**
+   * Returns the RGB color for a normalized value t (0-1) based on the LUT. If t is out of bounds, returns black
+   * @param t Normalized value (0-1) to map to an RGB color
+   * @returns RGB color as an array of three numbers [R, G, B] where each component is in the range 0-255
+   */
+  getRGB(t: number): RGB {
+    const idx = (t <= 0 ? 0 : t >= 1 ? 255 : (t * 255) | 0) * 3;
+    if (idx < 0 || idx + 2 >= this.lut.length) {
+      return [0, 0, 0];
+    }
+    return [this.lut[idx]!, this.lut[idx + 1]!, this.lut[idx + 2]!];
+  }
+
+  /**
+   * Sets the color map type and regenerates the lookup table
+   * @param type String name of the color map to use. Must be one of the supported color map names
+   */
+  setMap(type: ColorMapName) {
+    this.type = type;
+    this.generateLut();
+  }
+}
+
+/**
+ * Interpolates a color from a color map based on a normalized value
+ * @param t Normalized value (0-1)
+ * @param map Array of RGB colors
+ * @returns Interpolated RGB color
+ */
 function interpolateColorMap(t: number, map: number[][]): RGB {
   if (t <= 0) {
     return map[0] as RGB;
@@ -694,9 +755,12 @@ function interpolateColorMap(t: number, map: number[][]): RGB {
   }
 
   const step = 1 / (map.length - 1);
+  // Bitwise OR with 0 to convert Infinity or NaN to 0 to avoid issues with the index calculation
   const idx = (t / step) | 0;
+  // Calculate the percentage within the current step for interpolation between two colors
   const localT = (t - idx * step) / step;
 
+  // Get the two colors to interpolate between based on the calculated index
   const c1 = map[idx];
   const c2 = map[idx + 1];
 
@@ -704,6 +768,7 @@ function interpolateColorMap(t: number, map: number[][]): RGB {
     return [0, 0, 0];
   }
 
+  // Interpolate between the two colors using linear interpolation, again using avoiding NaN or Infinity issues by using bitwise OR
   return [
     (c1[0]! + (c2[0]! - c1[0]!) * localT) | 0,
     (c1[1]! + (c2[1]! - c1[1]!) * localT) | 0,
@@ -867,38 +932,3 @@ const COLOR_MAP_FNS: Record<ColorMapName, (t: number) => RGB> = {
   winter,
   bone,
 };
-
-export class ColorMap {
-  private type: ColorMapName;
-  private lut: Uint8Array; // [R, G, B, R, G, B...] for 0..255
-
-  constructor(type: ColorMapName = "jet") {
-    this.type = type;
-    this.lut = new Uint8Array(256 * 3);
-    this.generateLut();
-  }
-
-  private generateLut() {
-    const fn = COLOR_MAP_FNS[this.type];
-    for (let i = 0; i < 256; i++) {
-      const rgb = fn(i / 255);
-      const j = i * 3;
-      this.lut[j] = rgb[0];
-      this.lut[j + 1] = rgb[1];
-      this.lut[j + 2] = rgb[2];
-    }
-  }
-
-  getRGB(t: number): RGB {
-    const idx = (t <= 0 ? 0 : t >= 1 ? 255 : (t * 255) | 0) * 3;
-    if (idx < 0 || idx + 2 >= this.lut.length) {
-      return [0, 0, 0];
-    }
-    return [this.lut[idx]!, this.lut[idx + 1]!, this.lut[idx + 2]!];
-  }
-
-  setMap(type: ColorMapName) {
-    this.type = type;
-    this.generateLut();
-  }
-}
