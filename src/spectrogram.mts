@@ -587,63 +587,69 @@ class FFTExecutor {
   private readonly spectrum: Float32Array;
 
   constructor(fftSize: number) {
-    if ((fftSize & (fftSize - 1)) !== 0) {
-      throw new Error("FFT size must be power of two");
+    if (fftSize <= 0 || fftSize % 2 !== 0) {
+      throw new Error("FFT size must be a positive value and a power of two");
     }
 
     this.fftSize = fftSize;
 
+    // Complex input array for the FFT, which will hold the interwoven real and imaginary parts of the input signal. The spectrum array, which
+    // is the magnitude output of compute(), will hold the magnitude values of the FFT output, which is half the size of the FFT for the DC component
     this.complexIn = new Float32Array(fftSize * 2);
     this.spectrum = new Float32Array(fftSize / 2 + 1);
   }
 
-  size(): number {
-    return this.fftSize;
-  }
-
+  /**
+   * Computes the FFT of the input signal and returns the magnitude spectrum normalized between 0 and 1 based on the provided minDb and maxDb values
+   * @param input Float32Array of length equal to fftSize
+   * @param sampleRate Sample rate of the input data, used to calculate the frequency bins for the output spectrum
+   * @param minDb Minimum dB value for normalization
+   * @param maxDb Maximum dB value for normalization
+   * @returns Float32Array of length fftSize / 2 + 1 containing the normalized magnitude spectrum
+   */
   compute(
     input: Float32Array,
     sampleRate: number,
     minDb: number,
     maxDb: number,
   ): Float32Array {
-    const N = this.fftSize;
     const cin = this.complexIn;
 
-    for (let i = 0; i < N; i++) {
+    for (let i = 0; i < this.fftSize; i++) {
       const j = i << 1;
       cin[j] = input[i]!;
+      // The imaginary part is set to 0 because the input signal is real-valued. The FFT will compute the complex frequency
+      // components, but since the input is real, the imaginary parts are initialized to zero
       cin[j + 1] = 0;
     }
 
-    // We can use 0 for the startTime because seisplot doesn't use it for fftForward
+    // We can use 0 for the startTime because we're not interested in the actual time values for the FFT output
     const inputDisplayData =
       SeismogramDisplayData.fromContiguousData(
         cin,
         sampleRate,
         DateTime.fromMillis(0),
       );
+    // Perform the actual FFT
     const out: Float32Array = fftForward(inputDisplayData).packedFreq;
-    const spec = this.spectrum;
 
-    const n = spec.length;
-    const invRange = 1 / (maxDb - minDb);
-    const eps = this.EPS;
-    const invLn10 = this.INV_LN10;
-
-    for (let i = 0; i < n; i++) {
+    // Convert the FFT output to a magnitude spectrum and normalize it
+    for (let i = 0; i < this.spectrum.length; i++) {
       const realComp = out[i];
       let p = 0;
-      // Check if valid FFT output values
+      // Check if valid FFT output values. If so, calculate the power of the frequency bin by squaring the real component and adding a small
+      // epsilon to avoid log(0) issues
       if (realComp !== undefined) {
-        p = realComp * realComp + eps;
+        p = realComp * realComp + this.EPS;
       }
 
-      const v = (10 * Math.log(p) * invLn10 - minDb) * invRange;
-      spec[i] = v < 0 ? 0 : v > 1 ? 1 : v;
+      // Convert the power to decibels and normalize it between 0 and 1 based on the provided minDb and maxDb values
+      const v = (10 * Math.log(p) * this.INV_LN10 - minDb) / (maxDb - minDb);
+      // Clamp the normalized value to be between 0 and 1 to avoid any out-of-bounds values in the spectrogram display
+      this.spectrum[i] = v < 0 ? 0 : v > 1 ? 1 : v;
     }
 
-    return spec;
+    return this.spectrum;
   }
 }
 
