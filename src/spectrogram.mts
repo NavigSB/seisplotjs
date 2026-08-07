@@ -114,17 +114,16 @@ export class Spectrogram extends Seismograph {
       const fullSeisData = new Float32Array(seismogram.y);
       const seismogramStartSec = seismogram.startTime.valueOf() / 1000;
 
-      // Initialize the spectrogram model for this particular seismogram and set the data
-      const spectrogram = new SpectrogramModel(
+      // Render the spectrogram to the canvas, using our calculated view start and end times to calculate where each chunk should be
+      // drawn. We use catch because the rendering is async and we don't want to block the main thread if an error occurs
+      this.canvasRenderer.render(
+        fullSeisData,
         this.spectrogramConfig,
         dataSampleRate,
         seismogramStartSec,
-      );
-      spectrogram.setData(fullSeisData);
-
-      // Render the spectrogram to the canvas, using our calculated view start and end times to calculate where each chunk should be
-      // drawn. We use catch because the rendering is async and we don't want to block the main thread if an error occurs
-      this.canvasRenderer.render(spectrogram, viewStartTime, viewEndTime).catch((err) => {
+        viewStartTime,
+        viewEndTime
+      ).catch((err) => {
         util.warn(`Error rendering spectrogram: ${err.message}`);
         return;
       });
@@ -168,6 +167,7 @@ export class Spectrogram extends Seismograph {
   }
 
   override createUnitsLabel() {
+    // Spectrograms are always in Hz, so we override the units label to return "Hz" if the ySublabelIsUnits flag is set
     if (this.spectrogramConfig && this.spectrogramConfig.ySublabelIsUnits) {
       return "Hz";
     }
@@ -182,26 +182,6 @@ export class Spectrogram extends Seismograph {
 }
 customElements.define(SPECTROGRAM_ELEMENT, Spectrogram);
 
-class SpectrogramModel {
-  config: SpectrogramConfig;
-  sampleRate: number;
-  data: Float32Array | null = null;
-
-  showRealTimeScale: boolean = false;
-  // Start time of the spectrogram in seconds from epoch
-  startTime: number = 0;
-
-  constructor(config: SpectrogramConfig, sampleRate: number, startTime: number) {
-    this.config = config;
-    this.sampleRate = sampleRate;
-    this.startTime = startTime;
-  }
-
-  setData(data: Float32Array) {
-    this.data = data;
-  }
-}
-
 class CanvasRenderer {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D | null = null;
@@ -214,50 +194,59 @@ class CanvasRenderer {
     this.windowSize = canvasSize;
   }
 
+  /**
+   * Clears the cache of processed data chunks, forcing new chunks to be generated on the next render
+   */
   clearCache() {
     this.chunksCache.clear();
   }
 
+  /**
+   * Sets the canvas element to render the spectrogram onto. This method should be called before calling render()
+   * @param canvas The HTMLCanvasElement to render the spectrogram onto
+   */
   setCanvas(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
   }
 
   /**
-   * Renders the SpectrogramModel on the given canvas at the specified time and frequency ranges
-   * @param canvas The canvas element on which to render the spectrogram
+   * Renders the spectrogram data onto the set canvas according to the provided configuration and view range. This method processes the seismic data in chunks,
+   * applies FFT, and maps the resulting magnitudes to colors based on the specified color map.
+   * @param data The seismic data to render as a spectrogram
+   * @param config The configuration settings for the spectrogram rendering
+   * @param sampleRate The sample rate of the seismic data in Hz
+   * @param dataStartTime The start time of the seismic data in seconds from epoch
    * @param viewStartTime The start time of the view range in seconds from epoch
    * @param viewEndTime The end time of the view range in seconds from epoch
    * @returns A promise resolving when rendering is complete
    */
-  async render(spectrogram: SpectrogramModel, viewStartTime: number, viewEndTime: number) {
+  async render(data: Float32Array, config: SpectrogramConfig, sampleRate: number, dataStartTime: number, viewStartTime: number, viewEndTime: number) {
     this.ctx = this.canvas.getContext("2d", { alpha: true })!;
     const processor = new ChunkProcessor(
-      spectrogram.config,
-      spectrogram.sampleRate,
+      config,
+      sampleRate,
       this.windowSize,
     );
-    if (!this.ctx || !spectrogram.data || !spectrogram.data.length || viewStartTime >= viewEndTime) {
+    if (!this.ctx || !data || !data.length || viewStartTime >= viewEndTime) {
       return;
     }
 
     // Get time and frequency range from model
-    const dataStartTime = spectrogram.startTime;
-    const dataEndTime = dataStartTime + spectrogram.data?.length / spectrogram.sampleRate;
-    const fMin = spectrogram.config.freqMin;
-    const fMax = spectrogram.config.freqMax;
+    const dataEndTime = dataStartTime + data.length / sampleRate;
+    const fMin = config.freqMin;
+    const fMax = config.freqMax;
 
-    const colorMap = new ColorMap(spectrogram.config.spectrogramColorMap);
+    const colorMap = new ColorMap(config.spectrogramColorMap);
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Calculates how big each chunk should be according to the desired time range and overlap
-    const sampleRate = spectrogram.sampleRate;
-    const overlap = Math.floor(spectrogram.config.overlapPerc * this.windowSize);
+    const overlap = Math.floor(config.overlapPerc * this.windowSize);
     const hopSize = Math.max(1, this.windowSize - overlap);
 
     // Calculates the number of samples to include in each chunk based on the desired minimum chunk
     // time. A minimum chunk time is often used for performance reasons
-    const targetSamples = spectrogram.config.minChunkTime * sampleRate;
+    const targetSamples = config.minChunkTime * sampleRate;
     const hopsPerChunk = Math.ceil(targetSamples / hopSize);
     const chunkSamples = hopsPerChunk * hopSize;
 
@@ -299,10 +288,10 @@ class CanvasRenderer {
 
         // Convert the processed data to an image
         const imgData = processor.process(
-          spectrogram.data,
+          data,
           chunkStart,
           chunkEnd,
-          spectrogram.config,
+          config,
           (val: number) => colorMap.getRGB(val),
         );
 
@@ -321,8 +310,9 @@ class CanvasRenderer {
         this.ctx.clip();
 
         this.drawChunk(
-          spectrogram,
           chunk,
+          sampleRate,
+          dataStartTime,
           viewStartTime,
           viewEndTime,
           fMin,
@@ -336,33 +326,32 @@ class CanvasRenderer {
 
   /**
    * Draws a chunk of spectrogram within the view range
-   * @param ctx 2D rendering context to draw on
    * @param chunk DataChunk instance to draw
-   * @param viewStartTime Start time of the view range in seconds
-   * @param viewEndTime End time of the view range in seconds
-   * @param fMin Minimum frequency to display
-   * @param fMax Maximum frequency to display
-   * @param plotW Width of the plot area
-   * @param plotH Height of the plot area
+   * @param sampleRate Sample rate of the seismic data in Hz
+   * @param startTime Start time of the seismic data in seconds from epoch
+   * @param viewStartTime Start time of the view range in seconds from epoch
+   * @param viewEndTime End time of the view range in seconds from epoch
+   * @param fMin Minimum frequency to display in Hz
+   * @param fMax Maximum frequency to display in Hz
    */
   private drawChunk(
-    spectrogram: SpectrogramModel,
     chunk: DataChunk,
+    sampleRate: number,
+    startTime: number,
     viewStartTime: number,
     viewEndTime: number,
-    fMin: number, // Hz
-    fMax: number, // Hz
+    fMin: number,
+    fMax: number,
   ) {
     if (!chunk.image) {
       return;
     }
 
     const viewDuration = viewEndTime - viewStartTime;
-    const sampleRate = spectrogram.sampleRate;
     const nyquist = sampleRate / 2;
 
-    const chunkStartTime = spectrogram.startTime + chunk.startIndex / sampleRate;
-    const chunkEndTime = spectrogram.startTime + chunk.endIndex / sampleRate;
+    const chunkStartTime = startTime + chunk.startIndex / sampleRate;
+    const chunkEndTime = startTime + chunk.endIndex / sampleRate;
 
     // Calculate the x-coordinates for the chunk within the plot area
     const plotW = this.canvas.width;
