@@ -83,7 +83,7 @@ export class SpectrogramConfig extends SeismographConfig {
   // Lower and upper bounds for spectrogram color scaling in decibels. FFT power values below minDb are shown as the darkest
   // color, and values above maxDb are shown as the brightest color.
   minDb: number = 30;
-  maxDb: number = 150;
+  maxDb: number = 120;
   // Color map for spectrogram display
   spectrogramColorMap: ColorMapName = "jet";
 
